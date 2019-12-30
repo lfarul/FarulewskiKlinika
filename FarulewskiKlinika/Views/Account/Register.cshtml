@@ -1,0 +1,48 @@
+﻿@model FarulewskiKlinika.ViewModels.RegisterViewModel
+
+@{
+    ViewBag.Title = "User Registration";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <br />
+            <h4>Zarejestruj się i załóż konto</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Pesel"></label>
+                <input asp-for="Pesel" class="form-control" />
+                <span asp-validation-for="Pesel" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Imie"></label>
+                <input asp-for="Imie" class="form-control" />
+                <span asp-validation-for="Imie" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nazwisko"></label>
+                <input asp-for="Nazwisko" class="form-control" />
+                <span asp-validation-for="Nazwisko" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Email"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Haslo"></label>
+                <input asp-for="Haslo" class="form-control" />
+                <span asp-validation-for="Haslo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PotwierdzHaslo"></label>
+                <input asp-for="PotwierdzHaslo" class="form-control" />
+                <span asp-validation-for="PotwierdzHaslo" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Rejestruję się</button>
+        </form>
+    </div>
+</div>

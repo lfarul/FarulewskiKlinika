@@ -1,0 +1,31 @@
+﻿@model FarulewskiKlinika.Models.Wizyta
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="card" style="width: 27rem;">
+
+    <img src="~/Images/kontakt.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title">Centrum Medyczne Farulewski Klinika</h5>
+
+        <p><span>Skontaktuj się z nami:</span></p>
+
+        <p><span> -> Bydgoszcz, ul. Medyczna 21, Toruń, ul. Kopernika 17</span></p>
+
+        <p><span> -> Poniedziałek - Sobota, 8.00 - 20.00</span></p>
+
+        <p><span> -> 345-76-87, 345-76-88</span></p>
+
+        <p><span> -> farulewskiklinika@kontakt.pl</span></p>
+
+        <a href="Index" class="btn btn-primary">Powrót</a>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+
+
