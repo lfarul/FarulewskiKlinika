@@ -6,16 +6,18 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using FarulewskiKlinika.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using FarulewskiKlinika.DataContext;
 
 namespace FarulewskiKlinika.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context)
         {
-            _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
@@ -35,8 +37,8 @@ namespace FarulewskiKlinika.Controllers
 
         public IActionResult Wizyta()
         {
-            //ViewData["LekarzID"] = new SelectList(_context.Pracownik, "PracownikID", "Email");
-            //ViewData["PacjentID"] = new SelectList(_context.Pacjent, "PacjentID", "Email");
+            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email");
+            ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email");
 
             return View();
         }
