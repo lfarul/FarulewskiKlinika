@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace FarulewskiKlinika.ViewModels
 {
-    public class WizytaViewModel
+    public class CreateRoleViewModel
     {
         [Required]
-        [Display(Name = "Użytkownik")]
-        public string UserName { get; set; }
-
-
+        [Display(Name = "Rola")]
+        public string RoleName { get; set; }
     }
 }
