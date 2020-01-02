@@ -95,5 +95,31 @@ namespace FarulewskiKlinika.Controllers
             }
             return View(model);
         }
+
+        public IActionResult getUser()
+        {
+            var userId = userManager.GetUserId(HttpContext.User);
+
+            ApplicationUser user = userManager.FindByIdAsync(userId).Result;
+
+            if
+                (userId == null)
+            {
+                return View();
+            }
+            else
+            {
+                return View(user);
+            }
+                //GetUserId(HttpContext.User);
+        }
+
+        [HttpGet]
+        public async Task<string> GetCurrentUserId()
+        {
+            ApplicationUser usr = await GetCurrentUserAsync();
+            return usr?.Id;
+        }
+        private Task <ApplicationUser> GetCurrentUserAsync() => userManager.GetUserAsync(HttpContext.User);
     }
 }
