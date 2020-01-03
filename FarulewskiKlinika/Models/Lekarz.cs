@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace FarulewskiKlinika.Models
 {
-    public class Pracownik
+    public class Lekarz
     {
-        public int PracownikID { get; set; }
+        public int LekarzID { get; set; }
 
         [Required]
         [Display(Name = "Imię")]
@@ -18,9 +18,6 @@ namespace FarulewskiKlinika.Models
         public string Nazwisko { get; set; }
 
         [Required]
-        public string Rola { get; set; }
-
-        [Required]
         public string Specjalizacja { get; set; }
 
         [Required]
@@ -28,5 +25,8 @@ namespace FarulewskiKlinika.Models
 
         // navigation properties - lekarz może mieć kilka wizyt
         public virtual ICollection<Wizyta> Wizyty { get; set; }
+
     }
 }
+
+

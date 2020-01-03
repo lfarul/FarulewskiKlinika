@@ -1,4 +1,4 @@
-﻿@model FarulewskiKlinika.Models.Wizyta
+﻿@model FarulewskiKlinika.ViewModels.WizytaViewModel
 @using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -9,30 +9,33 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <p class="text-primary">Umów wizytę @UserManager.GetUserName(User) </p>
+    <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
+    <h4 class="text-primary">Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
     <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    Pacjent: @UserManager.GetUserName(User)
+                    <p><strong>Pacjent</strong></p>
+                    <p>Imie: @UserManager.GetUserAsync(User).Result.Imie</p>
+                    <p>Nazwisko: @UserManager.GetUserAsync(User).Result.Nazwisko</p>
+                    <p>Email: @UserManager.GetUserAsync(User).Result.Email
+                    <p>Pesel: @UserManager.GetUserAsync(User).Result.Pesel
                 </div>
                 <div class="form-group">
-                    Lekarz: @Model.LekarzID
+                    <p><strong>Lekarz</strong></p>
+                    <p>Lekarz: Imie</p>
+                    <p>Lekarz: Nazwisko</p>
+                    <p>Lekarz: Specjalizacja</p>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Specjalizacja" class="control-label"></label>
-                    <input asp-for="Specjalizacja" class="form-control" />
-                    <span asp-validation-for="Specjalizacja" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="DataWizyty" class="control-label"></label>
+                    <p><strong>Data wizyty</strong></p>
                     <input asp-for="DataWizyty" class="form-control" />
                     <span asp-validation-for="DataWizyty" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label asp-for="Zalecenia" class="control-label"></label>
+                    <p><strong>Zalecenia</strong></p>
                     <input asp-for="Zalecenia" class="form-control" />
                     <span asp-validation-for="Zalecenia" class="text-danger"></span>
                 </div>

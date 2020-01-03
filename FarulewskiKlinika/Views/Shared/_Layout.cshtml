@@ -35,6 +35,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -48,18 +49,8 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Personel">Umów wizytę</a>
                             </li>
-                            <!-- <li class="nav-item">
-         <a class="nav-link text-dark" asp-area="" asp-controller="Pracownik" asp-action="Index">Pracownik</a>
-     </li> -->
                         </ul>
                     </div>
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <form method="post" asp-controller="Account" asp-action="Logout">
-                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">Wyloguj się @User.Identity.Name</button>
-                            </form>
-                        </li>
-                    </ul>
                 </div>
             </nav>
         </header>
@@ -87,6 +78,7 @@ else
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <partial name="_LoginPartial" />
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -99,14 +91,14 @@ else
                         </li>
                     </ul>
                 </div>
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Register" class="nav-link">Zarejestruj się</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Login" class="nav-link">Zaloguj się</a>
-                    </li>
-                </ul>
+                <!-- <ul class="navbar-nav ml-auto">
+         <li class="nav-item">
+             <a asp-controller="Account" asp-action="Register" class="nav-link">Zarejestruj się</a>
+         </li>
+         <li class="nav-item">
+             <a asp-controller="Account" asp-action="Login" class="nav-link">Zaloguj się</a>
+         </li>
+     </ul>-->
             </div>
 
         </nav>

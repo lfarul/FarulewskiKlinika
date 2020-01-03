@@ -11,19 +11,17 @@ namespace FarulewskiKlinika.DataSeed
     {
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Pracownik>().HasData(
+            modelBuilder.Entity<Lekarz>().HasData(
 
                // new Pacjent { PacjentID = 1, Pesel = "11111111111", Imie = "Konrad", Nazwisko = "Styczen", Email = "styczen@wp.pl" },
                // new Pacjent { PacjentID = 2, Pesel = "22222222222", Imie = "Agata", Nazwisko = "Luty", Email = "luty@wp.pl" },
                // new Pacjent { PacjentID = 3, Pesel = "33333333333", Imie = "Jan", Nazwisko = "Marzec", Email = "marzec@wp.pl" }
 
-                new Pracownik { PracownikID = 1, Imie = "Konrad", Nazwisko = "Kowalski", Rola = "Lekarz", Specjalizacja = "Internista", Email = "kkowalski@medicover" },
-                new Pracownik { PracownikID = 2, Imie = "Agata", Nazwisko = "Nowak", Rola = "Lekarz", Specjalizacja = "Laryngolog", Email = "anowak@medicover" },
-                new Pracownik { PracownikID = 3, Imie = "Jan", Nazwisko = "Kujawski", Rola = "Lekarz", Specjalizacja = "Dermatolog", Email = "jkujawski@medicover" },
-                new Pracownik { PracownikID = 4, Imie = "Damian", Nazwisko = "Borowicz", Rola = "Lekarz", Specjalizacja = "Stomatolog", Email = "dborowicz@medicover" },
-                new Pracownik { PracownikID = 5, Imie = "Karolina", Nazwisko = "Zawadzka", Rola = "Lekarz", Specjalizacja = "Okulista", Email = "kzawadzka@medicover" },
-                new Pracownik { PracownikID = 6, Imie = "Magda", Nazwisko = "Montewska", Rola = "Pielęgniarka", Specjalizacja = "Zabiegowa", Email = "mmontewska@medicover" },
-                new Pracownik { PracownikID = 7, Imie = "Monika", Nazwisko = "Piotrowska", Rola = "Asystentka", Specjalizacja = "Stomatologia", Email = "mpiotrowska@medicover" }
+                new Lekarz { LekarzID = 1, Imie = "Konrad", Nazwisko = "Kowalski", Specjalizacja = "Internista", Email = "kkowalski@klinika" },
+                new Lekarz { LekarzID = 2, Imie = "Agata", Nazwisko = "Nowak", Specjalizacja = "Laryngolog", Email = "anowak@klinika" },
+                new Lekarz { LekarzID = 3, Imie = "Jan", Nazwisko = "Kujawski", Specjalizacja = "Dermatolog", Email = "jkujawski@klinika" },
+                new Lekarz { LekarzID = 4, Imie = "Damian", Nazwisko = "Borowicz", Specjalizacja = "Stomatolog", Email = "dborowicz@klinika" },
+                new Lekarz { LekarzID = 5, Imie = "Karolina", Nazwisko = "Zawadzka", Specjalizacja = "Okulista", Email = "kzawadzka@klinika" }           
             );
 
 

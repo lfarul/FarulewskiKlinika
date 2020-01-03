@@ -26,7 +26,7 @@ namespace FarulewskiKlinika.Models
 
         // navigation properties - wizyta może dotyczyć tylko jednego lekarza i pacjenta (lekarz przyjmuje jednego pacjenta)
         // podcza wizyty przyjmuje jeden lekarz
-        public virtual Pracownik Lekarz { get; set; }
+        public virtual Lekarz Lekarz { get; set; }
 
         // podczas wizyty obsługiwany jest jeden pacjent
         public virtual Pacjent Pacjent { get; set; }

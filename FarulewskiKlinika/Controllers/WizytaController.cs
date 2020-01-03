@@ -50,7 +50,7 @@ namespace FarulewskiKlinika.Controllers
         // GET: Wizyta/Create
         public IActionResult Create()
         {
-            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email");
+            ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email");
             ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email");
 
 
@@ -70,7 +70,7 @@ namespace FarulewskiKlinika.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email", wizyta.LekarzID);
+            ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email", wizyta.LekarzID);
             ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email", wizyta.PacjentID);
             return View(wizyta);
         }
@@ -88,7 +88,7 @@ namespace FarulewskiKlinika.Controllers
             {
                 return NotFound();
             }
-            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email", wizyta.LekarzID);
+            ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email", wizyta.LekarzID);
             ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email", wizyta.PacjentID);
             return View(wizyta);
         }
@@ -123,7 +123,7 @@ namespace FarulewskiKlinika.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email", wizyta.LekarzID);
+            ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email", wizyta.LekarzID);
             ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email", wizyta.PacjentID);
             return View(wizyta);
         }

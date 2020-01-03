@@ -37,9 +37,9 @@ namespace FarulewskiKlinika.Controllers
 
         public IActionResult Wizyta()
         {
-            ViewData["LekarzID"] = new SelectList(_context.Pracownicy, "PracownikID", "Email");
+            /*ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email");
             ViewData["PacjentID"] = new SelectList(_context.Pacjenci, "PacjentID", "Email");
-
+            ViewData["LekarzID"] = new SelectList(_context.Lekarze, "LekarzID", "Email");*/
             return View();
         }
 
