@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using FarulewskiKlinika.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using FarulewskiKlinika.DataContext;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FarulewskiKlinika.Controllers
 {
@@ -54,6 +55,26 @@ namespace FarulewskiKlinika.Controllers
             return View();
         }
 
+        
+        public IActionResult Lekarz()
+        {
+
+            List<Lekarz> lekarzeList = new List<Lekarz>();
+            Lekarz lekarz = new Lekarz();
+
+
+            lekarzeList.Add(new Lekarz { LekarzID = 1, Imie = "Konrad", Nazwisko = "Kowalski", Specjalizacja = "Internista", Email = "kkowalski@klinika" });
+            lekarzeList.Add(new Lekarz { LekarzID = 2, Imie = "Agata", Nazwisko = "Nowak", Specjalizacja = "Laryngolog", Email = "anowak@klinika" });
+            lekarzeList.Add(new Lekarz { LekarzID = 3, Imie = "Jan", Nazwisko = "Kujawski", Specjalizacja = "Dermatolog", Email = "jkujawski@klinika" });
+            lekarzeList.Add(new Lekarz { LekarzID = 4, Imie = "Damian", Nazwisko = "Borowicz", Specjalizacja = "Stomatolog", Email = "dborowicz@klinika" });
+            lekarzeList.Add(new Lekarz { LekarzID = 5, Imie = "Karolina", Nazwisko = "Zawadzka", Specjalizacja = "Okulista", Email = "kzawadzka@klinika" });
+            lekarzeList.Add(new Lekarz { LekarzID = 6, Imie = "Dorota", Nazwisko = "Zimokowska", Specjalizacja = "Reumatolog", Email = "dzimokowska@klinika" });
+            
+            ViewBag.LekarzeList = lekarzeList;
+
+            return View();
+        
+        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
