@@ -1,0 +1,52 @@
+﻿@model IEnumerable<FarulewskiKlinika.Models.Lekarz>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create" class="btn btn-success">Dodaj nowego lekarza</a>
+</p>
+<table class="table">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Imie)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nazwisko)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Specjalizacja)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>Co chcesz zrobić?</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Imie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nazwisko)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Specjalizacja)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <td>
+                    <a asp-action="Edit" class="btn btn-sm btn-primary" asp-route-id="@item.LekarzID">Edytuj</a> |
+                    <a asp-action="Details" class="btn btn-sm btn-primary" asp-route-id="@item.LekarzID">Szczegóły</a> |
+                    <a asp-action="Delete" class="btn btn-sm btn-danger" asp-route-id="@item.LekarzID">Usuń</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

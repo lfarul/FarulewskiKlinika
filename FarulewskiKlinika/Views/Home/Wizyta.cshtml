@@ -9,33 +9,33 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
     <h4 class="text-primary">Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
+    <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
     <br />
     <div class="row">
         <div class="col-md-4">
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <p><strong>Pacjent</strong></p>
+                    <p class="text-light bg-dark">Pacjent</p>
                     <p>Imie: @UserManager.GetUserAsync(User).Result.Imie</p>
                     <p>Nazwisko: @UserManager.GetUserAsync(User).Result.Nazwisko</p>
                     <p>Email: @UserManager.GetUserAsync(User).Result.Email
                     <p>Pesel: @UserManager.GetUserAsync(User).Result.Pesel
                 </div>
                 <div class="form-group">
-                    <p><strong>Lekarz</strong></p>
-                    <p>Lekarz: @Model.Imie</p>
-                    <p>Lekarz: @Model.Nazwisko</p>
-                    <p>Lekarz: @Model.Specjalizacja</p>
+                    <p class="text-light bg-dark">Lekarz</p>
+                    <p>Lekarz: Imie</p>
+                    <p>Lekarz: Nazwisko</p>
+                    <p>Lekarz: Specjalizacja</p>
                 </div>
                 <div class="form-group">
-                    <p><strong>Data wizyty</strong></p>
+                    <p class="text-light bg-dark">Data wizyty</p>
                     <input asp-for="DataWizyty" class="form-control" />
                     <span asp-validation-for="DataWizyty" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <p><strong>Zalecenia</strong></p>
+                    <p class="text-light bg-dark">Zalecenia</p>
                     <input asp-for="Zalecenia" class="form-control" />
                     <span asp-validation-for="Zalecenia" class="text-danger"></span>
                 </div>
