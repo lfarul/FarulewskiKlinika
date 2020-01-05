@@ -9,11 +9,11 @@
 
 @if (SignInManager.IsSignedIn(User))
 {
-    <h4 class="text-primary">Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
     <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
-    <br />
     <div class="row">
         <div class="col-md-4">
+            <h4 class="text-primary">  Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
+            <br />
             <form asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
@@ -25,56 +25,53 @@
                 </div>
                 <div class="form-group">
                     <p class="text-light bg-dark">Lekarz</p>
-                    <p>Lekarz: Imie</p>
-                    <p>Lekarz: Nazwisko</p>
-                    <p>Lekarz: Specjalizacja</p>
+                    <p>Imie: @Model.Lekarz.Imie</p>
+                    <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
+                    <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
                 </div>
                 <div class="form-group">
                     <p class="text-light bg-dark">Data wizyty</p>
                     <input asp-for="DataWizyty" class="form-control" />
                     <span asp-validation-for="DataWizyty" class="text-danger"></span>
                 </div>
-                <div class="form-group">
+                <!--<div class="form-group">
                     <p class="text-light bg-dark">Zalecenia</p>
                     <input asp-for="Zalecenia" class="form-control" />
                     <span asp-validation-for="Zalecenia" class="text-danger"></span>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <input type="submit" value="Umawiam" class="btn btn-primary" />
-                    <a href="Personel" class="btn btn-outline-secondary">Powrót</a>
+                    <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>
         </div>
     </div>
 }
 
-
-
 else
 {
-    <br>
-    <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
-    <font size="5">Przed umówieniem wizyty, proszę się zalogować.</font>
-    <br>
-    <br>
-    <font size="3">Czy już się rejestrowałeś? Proszę potwierdzić rejestrację.</font>
-    <br>
-    <br>
-    <br>
-    <br>
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Zarejestruj się</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Zaloguj się</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link text-dark" font color="blue" asp-action="Index">Powrót</a>
-        </li>
-    </ul>
+<br>
+<img src="~/Images/img1.jpg" align="left" height="200" width="250" />
+<font size="5">Przed umówieniem wizyty, proszę się zalogować.</font>
+<br>
+<br>
+<font size="3">Czy już się rejestrowałeś? Proszę potwierdzić rejestrację.</font>
+<br>
+<br>
+<br>
+<br>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Zarejestruj się</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Zaloguj się</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" font color="blue" asp-action="Index">Powrót</a>
+    </li>
+</ul>
 }
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

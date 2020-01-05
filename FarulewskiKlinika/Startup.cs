@@ -36,7 +36,7 @@ namespace FarulewskiKlinika
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddScoped<PacjentRepository, SqlPacjentRepository>();
+            services.AddScoped<LekarzRepository, SqlLekarzRepository>();
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "CookieName";

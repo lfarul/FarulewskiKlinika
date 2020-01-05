@@ -47,10 +47,10 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Personel">Umów wizytę</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Lekarz" asp-action="Index">Wykaz lekarzy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="NewLekarz" asp-action="Create">Create</a>
                             </li>
                         </ul>
                     </div>
@@ -95,13 +95,13 @@ else
                     </ul>
                 </div>
                 <!-- <ul class="navbar-nav ml-auto">
-         <li class="nav-item">
-             <a asp-controller="Account" asp-action="Register" class="nav-link">Zarejestruj się</a>
-         </li>
-         <li class="nav-item">
-             <a asp-controller="Account" asp-action="Login" class="nav-link">Zaloguj się</a>
-         </li>
-     </ul>-->
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Register" class="nav-link">Zarejestruj się</a>
+                    </li>
+                    <li class="nav-item">
+                        <a asp-controller="Account" asp-action="Login" class="nav-link">Zaloguj się</a>
+                    </li>
+                </ul>-->
             </div>
 
         </nav>
@@ -114,3 +114,11 @@ else
 </body>
 </html>
 }
+<div>
+    @RenderBody()
+</div>
+@if (IsSectionDefined("site"))
+{
+    @RenderSection("site", required: true);
+}
+ 

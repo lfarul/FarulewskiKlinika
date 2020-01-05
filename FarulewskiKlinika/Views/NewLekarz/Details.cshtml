@@ -1,0 +1,42 @@
+﻿@model FarulewskiKlinika.ViewModels.HomeDetailsViewModel
+
+@{
+    ViewBag.Title = "Lekarz Details";
+    var photoPath = "~/Images/" + (Model.Lekarz.PhotoPath ?? "img_bg_6.jpg");
+}
+
+<div class="row justify-content-center m-3">
+    <div class="col-sm-8">
+        <div class="card">
+            <div class="card-header">
+                <h1>@Model.Lekarz.Imie @Model.Lekarz.Nazwisko</h1>
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src="@photoPath" asp-append-version="true" />
+            </div>
+            <div class="card-body text-center">
+                <img class="card-img-top" src=" " />
+                <h4>Lekarz ID: @Model.Lekarz.LekarzID</h4>
+                <h4>Imie: @Model.Lekarz.Imie</h4>
+                <h4>Nazwisko: @Model.Lekarz.Nazwisko</h4>
+                <h4>Specjalizacja: @Model.Lekarz.Specjalizacja</h4>
+                <h4>Email: @Model.Lekarz.Email</h4>
+                <h4>Opis: @Model.Lekarz.Opis</h4>
+            </div>
+
+                <div class="card-footer text-center">
+                    <a asp-controller="NewLekarz" asp-action="Index" class="btn btn-primary">Back</a>
+                    <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Edit</a>
+                    <a href="#" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    @section site {
+        <script src="~/js/site.js"></script>
+    }
+
+

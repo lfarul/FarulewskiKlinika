@@ -22,7 +22,7 @@ namespace FarulewskiKlinika.Models
         [Display(Name = "Data wizyty")]
         public DateTime DataWizyty { get; set; }
 
-        public string Zalecenia { get; set; }
+        // public string Zalecenia { get; set; }
 
         // navigation properties - wizyta może dotyczyć tylko jednego lekarza i pacjenta (lekarz przyjmuje jednego pacjenta)
         // podcza wizyty przyjmuje jeden lekarz

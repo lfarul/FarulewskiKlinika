@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FarulewskiKlinika.Models
+namespace FarulewskiKlinika.ViewModels
 {
-    public class Lekarz
+    public class LekarzCreateViewModel
     {
-        public int LekarzID { get; set; }
-
         // Imie
         [Required(ErrorMessage = "Proszę podać imię lekarza")]
         [Display(Name = "Imię")]
@@ -20,7 +18,6 @@ namespace FarulewskiKlinika.Models
         [Required(ErrorMessage = "Proszę podać nazwisko lekarza")]
         public string Nazwisko { get; set; }
 
-        // Specjalizacja
         [Required(ErrorMessage = "Proszę podać specjalizację")]
         public string Specjalizacja { get; set; }
 
@@ -29,17 +26,12 @@ namespace FarulewskiKlinika.Models
         [RegularExpression(@"^[a-zA-Z0-9_+.-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$", ErrorMessage = "To nie jest email")]
         public string Email { get; set; }
 
-        // Opis
-        public string Opis { get; set; }
-
-        // Zdjęcie
         [Display(Name = "Zdjęcie")]
-        public string PhotoPath { get; set; }
+        public IFormFile Foto { get; set; }
 
-        // navigation properties - lekarz może mieć kilka wizyt
-        public virtual ICollection<Wizyta> Wizyty { get; set; }
+        
+        [Required(ErrorMessage = "Proszę podać opis")]
+        public string Opis { get; set; }
 
     }
 }
-
-

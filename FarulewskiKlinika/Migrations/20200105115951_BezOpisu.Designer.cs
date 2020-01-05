@@ -4,14 +4,16 @@ using FarulewskiKlinika.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FarulewskiKlinika.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200105115951_BezOpisu")]
+    partial class BezOpisu
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,9 +117,6 @@ namespace FarulewskiKlinika.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Opis")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
@@ -217,6 +216,9 @@ namespace FarulewskiKlinika.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Specjalizacja")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zalecenia")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("WizytaID");

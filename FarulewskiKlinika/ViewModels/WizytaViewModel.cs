@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FarulewskiKlinika.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,23 +10,9 @@ namespace FarulewskiKlinika.ViewModels
     public class WizytaViewModel
     {
         public int WizytaID { get; set; }
-
-        public string UserName { get; set; }
-
-        public int LekarzID { get; set; }
-
-        [Required]
-        [Display(Name = "Imię")]
-        public string Imie { get; set; }
-
-        [Required]
-        public string Nazwisko { get; set; }
-
-        [Required]
-        public string Specjalizacja { get; set; }
-
-        [Required]
-        public string Email { get; set; }
+        public Lekarz Lekarz { get; set; }
+        
+        public int PacjentID { get; set; }
 
         [Required(ErrorMessage = "Proszę podać datę wizyty")]
         [Display(Name = "Data wizyty")]
