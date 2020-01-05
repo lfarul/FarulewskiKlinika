@@ -1,0 +1,23 @@
+﻿@model FarulewskiKlinika.ViewModels.WizytaDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+
+<img src="~/Images/img1.jpg" align="left" height="200" width="250" />
+
+<br />
+
+<p class="h3">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
+
+    <br />
+
+    <div class="form-group">
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
+    </div>
+
+
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
+

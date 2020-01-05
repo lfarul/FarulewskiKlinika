@@ -40,7 +40,8 @@
                     <span asp-validation-for="Zalecenia" class="text-danger"></span>
                 </div>-->
                 <div class="form-group">
-                    <input type="submit" value="Umawiam" class="btn btn-primary" />
+                    <a asp-controller="NewLekarz" asp-action="WizytaDetails" class="btn btn-primary">Umawiam</a>
+
                     <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>
@@ -68,7 +69,7 @@ else
         <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Zaloguj się</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link text-dark" font color="blue" asp-action="Index">Powrót</a>
+        <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
     </li>
 </ul>
 }

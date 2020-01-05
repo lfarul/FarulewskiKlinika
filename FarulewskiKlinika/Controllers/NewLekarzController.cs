@@ -153,6 +153,17 @@ namespace FarulewskiKlinika.Controllers
             return View(wizytaViewModel);
         }
 
+        public ViewResult WizytaDetails(int id)
+        {
+            WizytaDetailsViewModel wizytaDetailsViewModel = new WizytaDetailsViewModel()
+            {
+                Lekarz = _lekarzRepository.GetLekarz(id),
+                
+            };
+
+            return View(wizytaDetailsViewModel);
+        }
+
         public IActionResult ZapiszWizyta(WizytaViewModel model)
         {
             //WizytaViewModel wizytaViewModel = new WizytaViewModel();
@@ -163,7 +174,7 @@ namespace FarulewskiKlinika.Controllers
             wizyta.WizytaID = model.WizytaID;
             wizyta.DataWizyty = model.DataWizyty;
           
-            return View();
+            return View ("WizytaDetails");
         }
     }
 }
