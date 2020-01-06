@@ -1,0 +1,53 @@
+﻿@model FarulewskiKlinika.ViewModels.WizytaDetailsPdfViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<img src="~/Images/DarkThemePDF.jpg" align="left" height="200" width="250" />
+<hr />
+
+<p class="h3">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
+
+<br />
+
+<p class="h4">Podsumowanie Twojej wizyty </p>
+<hr />
+<br />
+<br />
+<br />
+<br />
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+
+            <p font size="25" class="text-white bg-dark font-weight-bold">Pacjent</p>
+            <p font size="25">Imie: @UserManager.GetUserAsync(User).Result.Imie</p>
+            <p font size="25">Nazwisko: @UserManager.GetUserAsync(User).Result.Nazwisko</p>
+            <p font size="25">Email: @UserManager.GetUserAsync(User).Result.Email</p>
+            <p font size="25">Pesel: @UserManager.GetUserAsync(User).Result.Pesel</p>
+
+        </div>
+        <div class="form-group">
+
+            <p font size="25" class="text-white bg-dark font-weight-bold">Lekarz</p>
+            <p font size="25">Imie: @Model.Lekarz.Imie</p>
+            <p font size="25">Nazwisko: @Model.Lekarz.Nazwisko</p>
+            <p font size="25">Specjalizacja: @Model.Lekarz.Specjalizacja</p>
+
+        </div>
+        <div class="form-group">
+
+            <p font size="25" class="text-white bg-dark font-weight-bold">Data wizyty</p>
+            <input asp-for="DataWizyty" class="form-control" />
+            <span asp-validation-for="DataWizyty" class="text-danger"></span>
+
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

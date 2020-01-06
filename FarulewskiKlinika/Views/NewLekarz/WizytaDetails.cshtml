@@ -4,20 +4,45 @@
 @inject UserManager<ApplicationUser> UserManager
 
 
-<img src="~/Images/img1.jpg" align="left" height="200" width="250" />
-
-<br />
+<img src="~/Images/img3.jpg" align="left" height="200" width="250" />
 
 <p class="h3">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
 
-    <br />
+<br />
 
-    <div class="form-group">
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
+<p class="h5">  Podsumowanie </p>
+<hr />
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="row">
+    <div class="col-md-4">
+        <div class="form-group">
+            <p class="text-white bg-dark">Pacjent</p>
+            <p>Imie: @UserManager.GetUserAsync(User).Result.Imie</p>
+            <p>Nazwisko: @UserManager.GetUserAsync(User).Result.Nazwisko</p>
+            <p>Email: @UserManager.GetUserAsync(User).Result.Email
+            <p>Pesel: @UserManager.GetUserAsync(User).Result.Pesel
+        </div>
+        <div class="form-group">
+            <p class="text-white bg-dark">Lekarz</p>
+            <p>Imie: @Model.Lekarz.Imie</p>
+            <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
+            <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
+        </div>
+        <div class="form-group">
+            <p class="text-white bg-dark">Data wizyty</p>
+            <input asp-for="DataWizyty" class="form-control" />
+            <span asp-validation-for="DataWizyty" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
+            <a asp-controller="NewLekarz" asp-action="WizytaPDF" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-outline-secondary">Wydruk do PDF</a>
+        </div>
     </div>
+</div>
 
 
-    @section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
 

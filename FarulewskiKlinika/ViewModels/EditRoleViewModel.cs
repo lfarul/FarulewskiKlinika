@@ -14,7 +14,8 @@ namespace FarulewskiKlinika.ViewModels
         }
         public string RoleID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Proszę podać nazwę roli")]
+        [Display(Name = "Rola")]
         public string RoleName { get; set; }
 
         public List<string> Users { get; set; }

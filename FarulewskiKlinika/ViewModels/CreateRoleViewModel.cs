@@ -8,7 +8,7 @@ namespace FarulewskiKlinika.ViewModels
 {
     public class CreateRoleViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Proszę podać rolę")]
         [Display(Name = "Rola")]
         public string RoleName { get; set; }
     }

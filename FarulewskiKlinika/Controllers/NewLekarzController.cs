@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Rotativa.AspNetCore;
 
 namespace FarulewskiKlinika.Controllers
 {
@@ -162,6 +163,18 @@ namespace FarulewskiKlinika.Controllers
             };
 
             return View(wizytaDetailsViewModel);
+        }
+
+        // Zapisz w PDF
+        public ViewResult WizytaPDF(int id)
+        {
+            WizytaDetailsPdfViewModel wizytaDetailsPdfViewModel = new WizytaDetailsPdfViewModel()
+            {
+                Lekarz = _lekarzRepository.GetLekarz(id),
+
+            };
+
+            return new ViewAsPdf(wizytaDetailsPdfViewModel);
         }
 
         public IActionResult ZapiszWizyta(WizytaViewModel model)

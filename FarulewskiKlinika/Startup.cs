@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Rotativa.AspNetCore;
 
 namespace FarulewskiKlinika
 {
@@ -24,7 +25,7 @@ namespace FarulewskiKlinika
             _configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        // public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,6 +35,7 @@ namespace FarulewskiKlinika
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+           
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddScoped<LekarzRepository, SqlLekarzRepository>();
@@ -46,7 +48,7 @@ namespace FarulewskiKlinika
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -72,6 +74,7 @@ namespace FarulewskiKlinika
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            RotativaConfiguration.Setup(env);
         }
     }
 }

@@ -55,6 +55,7 @@ namespace FarulewskiKlinika.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult ListRoles()
         {
             var roles = roleManager.Roles;
@@ -92,6 +93,24 @@ namespace FarulewskiKlinika.Controllers
                     model.Users.Add(user.UserName);
                 }
             }
+            return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel model)
+        {
+            var role = await roleManager.FindByIdAsync(model.RoleID);
+
+            if (role == null)
+            {
+                ViewBag.Errormessage = $"Rola z ID = {model.RoleID} nie została znaleziona.";
+                return View("NotFound");
+            }
+            else
+            {
+                role.Name = model.RoleName;
+
+            }
+
             return View(model);
         }
     }
