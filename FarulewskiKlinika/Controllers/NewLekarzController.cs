@@ -149,6 +149,7 @@ namespace FarulewskiKlinika.Controllers
             WizytaViewModel wizytaViewModel = new WizytaViewModel()
             {
                 Lekarz = _lekarzRepository.GetLekarz(id),
+                
             };
 
             return View(wizytaViewModel);

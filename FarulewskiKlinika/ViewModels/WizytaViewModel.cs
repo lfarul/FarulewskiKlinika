@@ -7,18 +7,31 @@ using System.Threading.Tasks;
 
 namespace FarulewskiKlinika.ViewModels
 {
-    public class WizytaViewModel
-    {
-        public int WizytaID { get; set; }
-        public Lekarz Lekarz { get; set; }
+    public class WizytaViewModel {
         
-        public int PacjentID { get; set; }
+        
+        public WizytaViewModel()
+        
+        {
+        
+            Users = new List<string>();
+        }
 
-        [Required(ErrorMessage = "Proszę podać datę wizyty")]
-        [Display(Name = "Data wizyty")]
-        public DateTime DataWizyty { get; set; }
+    public int WizytaID { get; set; }
 
-        public string Zalecenia { get; set; }
+    public Lekarz Lekarz { get; set; }
 
+    public int PacjentID { get; set; }
+
+    [Required(ErrorMessage = "Proszę podać datę wizyty")]
+    [Display(Name = "Data wizyty")]
+    public DateTime DataWizyty { get; set; }
+
+    public List<string> Users { get; set; }
+    
     }
 }
+    
+
+
+

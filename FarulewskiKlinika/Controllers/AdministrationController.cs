@@ -102,16 +102,67 @@ namespace FarulewskiKlinika.Controllers
 
             if (role == null)
             {
-                ViewBag.Errormessage = $"Rola z ID = {model.RoleID} nie została znaleziona.";
+                ViewBag.ErrorMessage = $"Rola z ID = {model.RoleID} nie została znaleziona.";
+
                 return View("NotFound");
             }
             else
             {
                 role.Name = model.RoleName;
+                var result = await roleManager.UpdateAsync(role);
 
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUsersInRole(string roleId)
+        {
+            ViewBag.roleId = roleId;
+
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Rola z ID = {roleId} nie została znaleziona.";
+
+                return View("NotFound");
+            }
+
+            var model = new List<UserRoleViewModel>();
+
+            foreach (var user in userManager.Users)
+            {
+                var userRoleViewModel = new UserRoleViewModel
+                {
+                    UserID = user.Id,
+                    UserName = user.UserName
+                };
+                
+                if(await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    userRoleViewModel.IsSelected = true;
+                }
+
+                else
+                {
+                    userRoleViewModel.IsSelected = false;
+                }
+
+                model.Add(userRoleViewModel);
             }
 
             return View(model);
         }
+
     }
 }
