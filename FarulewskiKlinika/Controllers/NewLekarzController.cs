@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using FarulewskiKlinika.DataContext;
 using FarulewskiKlinika.Models;
 using FarulewskiKlinika.Repositories;
 using FarulewskiKlinika.ViewModels;
@@ -20,13 +21,15 @@ namespace FarulewskiKlinika.Controllers
         private readonly LekarzRepository _lekarzRepository;
         private readonly IHostingEnvironment hostingEnvironment;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext _context;
 
         public NewLekarzController(LekarzRepository lekarzRepository, IHostingEnvironment hostingEnvironment,
-            UserManager<ApplicationUser> userManager)
+            UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
             _lekarzRepository = lekarzRepository;
             this.hostingEnvironment = hostingEnvironment;
             this.userManager = userManager;
+            _context = context;
         }
 
         // Wykaz lekarzy dla pacjenta
@@ -159,7 +162,6 @@ namespace FarulewskiKlinika.Controllers
             WizytaViewModel wizytaViewModel = new WizytaViewModel()
             {
                 Lekarz = _lekarzRepository.GetLekarz(id),
-                DataWizyty = 
                 
             };
 
@@ -200,6 +202,19 @@ namespace FarulewskiKlinika.Controllers
             wizyta.DataWizyty = model.DataWizyty;
           
             return View ("WizytaDetails");
+        }
+
+
+        public Lekarz Delete(int id)
+        {
+            // before deleting a Pacjent, we need to find them first
+            Lekarz lekarz = _context.Lekarze.Find(id);
+            if (lekarz != null)
+            {
+                _context.Lekarze.Remove(lekarz);
+                _context.SaveChanges();
+            }
+            return lekarz;
         }
     }
 }

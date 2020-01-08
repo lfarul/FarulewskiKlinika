@@ -23,6 +23,77 @@ namespace FarulewskiKlinika.Controllers
             this.userManager = userManager;
         }
 
+        // Usuwam Usera i przekazuje w metodzie id usera. Używając tego przychodzącego id chce uzyskać określonego usera z bazy danych
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string id)
+        {
+            // znajdź usera po Id
+            var user = await userManager.FindByIdAsync(id);
+
+            // jeżeli nie ma usera
+            if (user == null)
+            {
+                ViewBag.Errormessage = $"User z ID = {id} nie został znaleziony.";
+                return View("NotFound");
+            }
+
+            // w przeciwnym razie korzystam z servicu userManager i wywołuje metodę DeleteAsync w której przekazuje usera do usunięcia.
+            else
+            {
+                var result = await userManager.DeleteAsync(user);
+
+                // jeżeli udało się uzunąć użytkownika
+                if (result.Succeeded)
+                {
+                    //wróc do widoku ListUsers
+                    return RedirectToAction("ListUsers");
+                }
+
+                // dla każdego errora w result podczas usuwania usera
+                foreach(var error in result.Errors)
+                {
+                    // dodaje errory do ModelState
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View("ListUsers");
+            }     
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            // szukam roli
+            var role = await roleManager.FindByIdAsync(id);
+
+            // jeżeli nie ma roli do usunięcia to pokaż widok NotFound
+            if(role == null)
+            {
+                // 
+                ViewBag.ErrorMessage = $"Rola z ID = {id} nie została znaleziona.";
+                return View("NotFound");
+            }
+            
+            // w przeciwnym razie, jeżeli znalazłem rolę z danym id w bazie danych, to przekazuje role do usunięcia
+            else
+            {
+                var result = await roleManager.DeleteAsync(role);
+
+                // jeżeli udało się usanąć rolę to pokazuje widok ListRoles
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                // dla każdego errora w result podczas usuwania usera
+                foreach (var error in result.Errors)
+                {
+                    // dodaje errory do ModelState
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View("ListRoles");
+            }
+        }
+
 
         [HttpGet]
         public IActionResult CreateRole()
@@ -94,12 +165,55 @@ namespace FarulewskiKlinika.Controllers
                 Imie = user.Imie,
                 Nazwisko = user.Nazwisko,
                 Pesel = user.Pesel,
+                Email = user.Email,
                 UserName = user.UserName,
                 Claims = userClaims.Select(c => c.Value).ToList(),
                 Roles = userRoles
             };
             return View(model);
         }
+
+        // Post request - aktualizuje Usera - update
+        // Modelem jest EditUserViewModel
+        [HttpPost]
+        public async Task<IActionResult> EditUser(EditUserViewModel model)
+        {
+            var user = await userManager.FindByIdAsync(model.Id);
+
+            if (user == null)
+            {
+                ViewBag.Errormessage = $"User z ID = {model.Id} nie został znaleziony.";
+                return View("NotFound");
+            }
+
+            else
+            {
+                // kopiuję UserName, Imie, Nazwisko, Pesel z obiektu model do odpowiednich propertisów w obiekcie user
+                user.UserName = model.UserName;
+                user.Email = model.Email;
+                user.Imie = model.Imie;
+                user.Nazwisko = model.Nazwisko;
+                user.Pesel = model.Pesel;
+
+                // wywołuje metodę UpdateAsync z wykorzystaniem serwisu userManager i w metodzie UpdateAsync przekazuje usera
+                // UpdateAsync(user) - ten obiekt aktualizuje dane usera w bazie danych
+                var result = await userManager.UpdateAsync(user);
+                
+                // jeżeli update się udał i został zapisany do bazy
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListUsers");
+                }
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+                return View(model);
+            };
+            
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)

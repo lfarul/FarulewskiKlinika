@@ -1,33 +1,47 @@
 ﻿@model IEnumerable<Lekarz>
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+    @{
+        ViewBag.Title = "Lekarz List";
+    }
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <h4>Wybierz lekarza @UserManager.GetUserAsync(User).Result.Imie</h4>
+        <hr />
+    }
+    else
+    {
+        <h4>Wybierz lekarza</h4>
+        <hr />
+    }
+    <br />
+
+    @foreach (var lekarz in Model)
+    {
+        var photoPath = "~/Images/" + (lekarz.PhotoPath ?? "img_bg_6.jpg");
 
 
-@{
-    ViewBag.Title = "Lekarz List";
-}
-
-@foreach (var lekarz in Model)
-{
-    var photoPath = "~/Images/" + (lekarz.PhotoPath ?? "img_bg_6.jpg");
-
-
-    <div class="card mb-3" style="max-width: 740px;">
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h5 class="card-title">@lekarz.Specjalizacja</h5>
-                    <h5 class="card-title">lek. @lekarz.Imie @lekarz.Nazwisko</h5>
-                    <p class="card-text">
-                        @lekarz.Opis
-                    </p>
-                    <form>
-                        <a asp-controller="NewLekarz" asp-action="Wizyta" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Umów wizytę</a>
-                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
-                    </form>
+        <div class="card mb-3" style="max-width: 740px;">
+            <div class="row no-gutters">
+                <div class="col-md-4">
+                    <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">@lekarz.Specjalizacja</h5>
+                        <h5 class="card-title">lek. @lekarz.Imie @lekarz.Nazwisko</h5>
+                        <p class="card-text">
+                            @lekarz.Opis
+                        </p>
+                        <form>
+                            <a asp-controller="NewLekarz" asp-action="Wizyta" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Umów wizytę</a>
+                            <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-}       
+    }

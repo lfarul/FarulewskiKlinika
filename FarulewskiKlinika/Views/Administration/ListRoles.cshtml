@@ -5,7 +5,7 @@
     ViewBag.Title = "All Roles";
 }
 
-<h4>To są wszystkie role </h4>
+<h4>Utworzone role </h4>
 <hr />
 
 @if (Model.Any())
@@ -15,21 +15,24 @@
     <br />
     foreach (var role in Model)
     {
-        <div class="card mb-3">
-            <div class="card-header">
+<div class="card mb-3">
+    <div class="card-header">
 
-                Role Id: @role.Id
+        Role Id: @role.Id
 
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
-            </div>
-            <div class="card-footer">
-                <a class="btn btn-primary" asp-action="EditRole" asp-controller="Administration"
-                   asp-route-id="@role.Id">Edytuj</a> <!--tutaj przekazuje Id roli którą edytuję-->
-                <a href="#" class="btn btn-danger">Usuń</a>
-            </div>
-        </div>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">@role.Name</h5>
+    </div>
+    <div class="card-footer">
+        <form asp-action="DeleteRole" asp-route-id="@role.Id" method="post">
+
+            <a asp-action="EditRole" asp-controller="Administration"
+               asp-route-id="@role.Id" class="btn btn-primary" >Edytuj</a> <!--tutaj przekazuje Id roli którą edytuję-->
+            <button type="submit" class="btn btn-danger" onclick="return confirm('Czy na pewno chcesz usunąć rolę: @role.Name ?')">Usuń</button>
+        </form>
+    </div>
+</div>
 
     }
 }
@@ -47,4 +50,4 @@ else
         </div>
     </div>
 }
-<a class="btn btn-outline-secondary" style="width:auto" asp-action="Home" asp-controller="Index">Powrót</a>
+<a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>

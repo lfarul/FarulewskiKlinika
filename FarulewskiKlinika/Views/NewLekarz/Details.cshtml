@@ -24,11 +24,11 @@
                 <h4>Opis: @Model.Lekarz.Opis</h4>
             </div>
 
-                <div class="card-footer text-center">
-                    <a asp-controller="NewLekarz" asp-action="Index" class="btn btn-primary">Back</a>
-                    <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Edit</a>
-                    <a href="#" class="btn btn-danger">Delete</a>
-                </div>
+            <div class="card-footer text-center">
+                <a asp-controller="NewLekarz" asp-action="Index" class="btn btn-primary">Back</a>
+                <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Edit</a>
+                <a asp-controller="NewLekarz" asp-action="Delete" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-danger">Delete</a>
+            </div>
             </div>
 
         </div>

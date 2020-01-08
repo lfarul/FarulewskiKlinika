@@ -16,7 +16,6 @@ namespace FarulewskiKlinika.Models
         [Display(Name = "Lekarz")]
         public int LekarzID { get; set; }
 
-        public string Specjalizacja { get; set; }
 
         [Required(ErrorMessage = "Proszę podać datę wizyty")]
         [Display(Name = "Data wizyty")]

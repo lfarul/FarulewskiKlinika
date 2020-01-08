@@ -20,6 +20,8 @@ namespace FarulewskiKlinika.ViewModels
         public string Nazwisko { get; set; }
         public string Pesel { get; set; }
 
+        public string Email{ get; set; }
+
         public string UserName { get; set; }
 
         public List<string> Claims { get; set; }
