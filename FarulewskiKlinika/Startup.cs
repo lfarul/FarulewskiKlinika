@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using FarulewskiKlinika.DataContext;
@@ -9,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,10 +37,20 @@ namespace FarulewskiKlinika
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-           
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture("en-US");
+                //By default the below will be set to whatever the server culture is. 
+                options.SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US") };
+
+                options.RequestCultureProviders = new List<IRequestCultureProvider>();
+            });
+
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddScoped<LekarzRepository, SqlLekarzRepository>();
+            services.AddScoped<WizytaRepository, WizytaRepositoryImpl>();
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "CookieName";
@@ -64,7 +76,7 @@ namespace FarulewskiKlinika
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseRequestLocalization();
             app.UseAuthentication();
             app.UseAuthorization();
 

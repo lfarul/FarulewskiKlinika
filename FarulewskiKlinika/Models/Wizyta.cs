@@ -11,7 +11,7 @@ namespace FarulewskiKlinika.Models
         public int WizytaID { get; set; }
 
         [Display(Name = "Pacjent")]
-        public int PacjentID { get; set; }
+        public int UserID { get; set; }
 
         [Display(Name = "Lekarz")]
         public int LekarzID { get; set; }

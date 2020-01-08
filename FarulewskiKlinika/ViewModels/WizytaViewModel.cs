@@ -16,18 +16,18 @@ namespace FarulewskiKlinika.ViewModels
         
             Users = new List<string>();
         }
+        
+        public int WizytaID { get; set; }
+        public Lekarz Lekarz { get; set; }
 
-    public int WizytaID { get; set; }
+        // pacjent
+        public string UserID { get; set; }
 
-    public Lekarz Lekarz { get; set; }
+        [Required(ErrorMessage = "Proszę podać datę wizyty")]
+        [Display(Name = "Data wizyty")]
+        public DateTime DataWizyty { get; set; }
 
-    public int PacjentID { get; set; }
-
-    [Required(ErrorMessage = "Proszę podać datę wizyty")]
-    [Display(Name = "Data wizyty")]
-    public DateTime DataWizyty { get; set; }
-
-    public List<string> Users { get; set; }
+        public List<string> Users { get; set; }
     
     }
 }

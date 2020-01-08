@@ -10,7 +10,6 @@ namespace FarulewskiKlinika.Repositories
     {
         private List<Lekarz> _lekarzList;
 
-
         public LekarzRepositoryImpl()
         {
             _lekarzList = new List<Lekarz>()
@@ -31,6 +30,8 @@ namespace FarulewskiKlinika.Repositories
             _lekarzList.Add(lekarz);
             return lekarz;
         }
+
+
 
         public Lekarz Delete(int id)
         {

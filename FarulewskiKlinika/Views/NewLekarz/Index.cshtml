@@ -16,19 +16,22 @@
     {
         var photoPath = "~/Images/" + (lekarz.PhotoPath ?? "img_bg_6.jpg");
 
-        <div class="card m-3" style="min-width: 16rem; max-width: 30.5%;">
-            <div class="card-body">
-                <h5 class="card-title">@lekarz.Specjalizacja</h5>
-                <h5 class="card-title">lek. @lekarz.Imie @lekarz.Nazwisko</h5>
-            </div>
-            <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
-            <div class="card-footer text-center">
-
-                <a asp-controller="NewLekarz" asp-action="Details" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">View</a>
-                <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Edit</a>
-                <a asp-controller="NewLekarz" asp-action="Delete" asp-route-id="@lekarz.LekarzID" class="btn btn-danger m-1">Delete</a>
-            </div>
+    <div class="card m-3" style="min-width: 16rem; max-width: 30.5%;">
+        <div class="card-body">
+            <h5 class="card-title">@lekarz.Specjalizacja</h5>
+            <h5 class="card-title">lek. @lekarz.Imie @lekarz.Nazwisko</h5>
+            <hr />
         </div>
+        
+        <img class="card-img-top imageThumbnail" src="@photoPath" asp-append-version="true" />
+        <div class="card-footer text-center">
+
+            <a asp-controller="NewLekarz" asp-action="Details" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Podgląd</a>
+            <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Edytuj</a>
+            <a asp-controller="NewLekarz" asp-action="Delete" asp-route-id="@lekarz.LekarzID" class="btn btn-danger"
+               onclick="return confirm('Czy na pewno chcesz usunąć lekarza: @lekarz.Imie @lekarz.Nazwisko ?')">Usuń</a>
+        </div>
+    </div>
     }
 </div>
 

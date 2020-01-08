@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FarulewskiKlinika.Controllers
 {
-    // Tylko użytkownik pełniący rolę Admin lub User, ma dostęp do funkcji Administratora
+    // Tylko użytkownik pełniący rolę Admin ma dostęp do funkcji Administratora
     [Authorize(Roles ="Admin")]
     public class AdministrationController : Controller
     {
@@ -241,6 +241,7 @@ namespace FarulewskiKlinika.Controllers
             }
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditRole(EditRoleViewModel model)
         {
@@ -309,6 +310,7 @@ namespace FarulewskiKlinika.Controllers
 
             return View(model);
         }
+
         [HttpPost]
         public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel>model, string roleId)
         {

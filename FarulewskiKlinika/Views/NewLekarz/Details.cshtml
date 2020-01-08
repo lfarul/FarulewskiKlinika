@@ -25,9 +25,10 @@
             </div>
 
             <div class="card-footer text-center">
-                <a asp-controller="NewLekarz" asp-action="Index" class="btn btn-primary">Back</a>
-                <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Edit</a>
-                <a asp-controller="NewLekarz" asp-action="Delete" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-danger">Delete</a>
+                <a asp-controller="NewLekarz" asp-action="Index" class="btn btn-primary">Powrót</a>
+                <a asp-controller="NewLekarz" asp-action="Edit" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Edytuj</a>
+                <a asp-controller="NewLekarz" asp-action="Delete" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-danger"
+                   onclick="return confirm('Czy na pewno chcesz usunąć lekarza: @Model.Lekarz.LekarzID ?')">Usuń</a>
             </div>
             </div>
 

@@ -156,6 +156,30 @@ namespace FarulewskiKlinika.Controllers
             return View();
         }
 
+
+      /*  [HttpPost]
+        //[Authorize]
+        public IActionResult CreateWizyta(WizytaViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                Wizyta newWizyta = new Wizyta
+                {
+                    WizytaID = model.WizytaID,
+                    Lekarz = model.Lekarz,
+                    UserID = model.UserID,
+                    DataWizyty = model.DataWizyty,
+                };
+
+                _lekarzRepository.Add(newWizyta);
+
+                return RedirectToAction("details", new { id = newWizyta.WizytaID });
+            }
+            return View();
+        }
+
+    */
+
         //[HttpPost]
         public IActionResult Wizyta(int id)
         {
@@ -172,8 +196,7 @@ namespace FarulewskiKlinika.Controllers
         {
             WizytaDetailsViewModel wizytaDetailsViewModel = new WizytaDetailsViewModel()
             {
-                Lekarz = _lekarzRepository.GetLekarz(id),
-                
+                Lekarz = _lekarzRepository.GetLekarz(id),     
             };
 
             return View(wizytaDetailsViewModel);
@@ -189,19 +212,6 @@ namespace FarulewskiKlinika.Controllers
             };
 
             return new ViewAsPdf(wizytaDetailsPdfViewModel);
-        }
-
-        public IActionResult ZapiszWizyta(WizytaViewModel model)
-        {
-            //WizytaViewModel wizytaViewModel = new WizytaViewModel();
-            Wizyta wizyta = new Wizyta();
-
-            wizyta.Lekarz = model.Lekarz;
-            wizyta.PacjentID = model.PacjentID;
-            wizyta.WizytaID = model.WizytaID;
-            wizyta.DataWizyty = model.DataWizyty;
-          
-            return View ("WizytaDetails");
         }
 
 

@@ -18,6 +18,16 @@ namespace FarulewskiKlinika.Controllers
 {
     public class HomeController : Controller
     {
+        private WizytaRepository _wizytaRepository;
+        public HomeController (WizytaRepository wizytaRepository)
+        {
+            _wizytaRepository = wizytaRepository;
+        }
+        
+        public int Test()
+        {
+            return _wizytaRepository.GetWizyta(1).WizytaID;
+        } 
        
         public IActionResult Index()
         {
