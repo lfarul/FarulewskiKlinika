@@ -29,11 +29,20 @@ namespace FarulewskiKlinika.Controllers
             this.userManager = userManager;
         }
 
+        // Wykaz lekarzy dla pacjenta
         public ViewResult NewIndex()
         {
             var model = _lekarzRepository.GetAllLekarz();
             return View(model);
         }
+
+        // Wykaz lekarzy dla administratora
+        public ViewResult Index()
+        {
+            var model = _lekarzRepository.GetAllLekarz();
+            return View(model);
+        }
+
 
         public ViewResult Details(int id)
         {
@@ -144,17 +153,19 @@ namespace FarulewskiKlinika.Controllers
             return View();
         }
 
+        //[HttpPost]
         public IActionResult Wizyta(int id)
         {
             WizytaViewModel wizytaViewModel = new WizytaViewModel()
             {
                 Lekarz = _lekarzRepository.GetLekarz(id),
+                DataWizyty = 
                 
             };
 
             return View(wizytaViewModel);
         }
-
+        //[HttpGet]
         public ViewResult WizytaDetails(int id)
         {
             WizytaDetailsViewModel wizytaDetailsViewModel = new WizytaDetailsViewModel()

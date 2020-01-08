@@ -53,6 +53,12 @@ namespace FarulewskiKlinika.Controllers
 
                 if (result.Succeeded)
                 {
+                    // Jeżeli nowego użytkownika rejestruje Admin
+                    if(signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Administration");
+                    }
+
                     await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }

@@ -31,14 +31,11 @@
                 </div>
                 <div class="form-group">
                     <p class="text-white bg-dark">Data wizyty</p>
+                    <label asp-for="DataWizyty" class="control-label">Proszę podać datę i godzinę wizyty</label>
                     <input asp-for="DataWizyty" class="form-control" />
                     <span asp-validation-for="DataWizyty" class="text-danger"></span>
                 </div>
-                <!--<div class="form-group">
-                    <p class="text-light bg-dark">Zalecenia</p>
-                    <input asp-for="Zalecenia" class="form-control" />
-                    <span asp-validation-for="Zalecenia" class="text-danger"></span>
-                </div>-->
+
                 <div class="form-group">
                     <a asp-controller="NewLekarz" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Umawiam</a>
 

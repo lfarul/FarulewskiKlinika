@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FarulewskiKlinika.Controllers
 {
+    // Tylko użytkownik pełniący rolę Admin lub User, ma dostęp do funkcji Administratora
+    [Authorize(Roles ="Admin")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -21,7 +23,7 @@ namespace FarulewskiKlinika.Controllers
             this.userManager = userManager;
         }
 
-        [Authorize]
+
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -63,10 +65,40 @@ namespace FarulewskiKlinika.Controllers
             return View(roles);
         }
 
+
+
         public IActionResult ListUsers()
         {
             var users = userManager.Users;
             return View(users);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> EditUser(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            if (user == null)
+            {
+                ViewBag.Errormessage = $"User z ID = {id} nie został znaleziony.";
+                return View("NotFound");
+            }
+
+            var userClaims = await userManager.GetClaimsAsync(user);
+            var userRoles = await userManager.GetRolesAsync(user);
+
+
+            var model = new EditUserViewModel
+            {
+                Id = user.Id,
+                Imie = user.Imie,
+                Nazwisko = user.Nazwisko,
+                Pesel = user.Pesel,
+                UserName = user.UserName,
+                Claims = userClaims.Select(c => c.Value).ToList(),
+                Roles = userRoles
+            };
+            return View(model);
         }
 
         [HttpGet]
@@ -162,6 +194,53 @@ namespace FarulewskiKlinika.Controllers
             }
 
             return View(model);
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditUsersInRole(List<UserRoleViewModel>model, string roleId)
+        {
+            var role = await roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Rola z ID = {roleId} nie została znaleziona.";
+
+                return View("NotFound");
+            }
+          for (int i = 0; i < model.Count; i++)
+            {
+                var user = await userManager.FindByIdAsync(model[i].UserID);
+
+                IdentityResult result = null;
+
+                // kiedy user jest zaznaczony i nie jest juz w tej roli
+                if (model[i].IsSelected && !(await userManager.IsInRoleAsync(user, role.Name))) 
+                {
+                    // dodaje usera jako członka danej roli - przekazuje 2 parametry - user którego dodaje 
+                    //i nazwę roli do której przypisuje usera
+                   result = await userManager.AddToRoleAsync(user, role.Name);
+                }
+                // jezeli user nie jest zaznaczony oraz jest już przypisany do danej roli
+                else if (!model[i].IsSelected && await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    result = await userManager.RemoveFromRoleAsync(user, role.Name);
+                }
+                else
+                {
+                    continue;
+                }
+                if (result.Succeeded)
+                {
+                    if (i < (model.Count - 1))
+
+                        continue;
+                    else
+
+                        return RedirectToAction("EditRole", new { Id = roleId });
+                }
+
+            }
+
+            return RedirectToAction("EditRole", new { Id = roleId });
         }
 
     }

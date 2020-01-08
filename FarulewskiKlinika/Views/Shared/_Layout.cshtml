@@ -1,6 +1,10 @@
 ﻿@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<ApplicationUser> SignInManager
+
 @inject UserManager<ApplicationUser> UserManager
+
+
 
 <head>
     <meta charset="utf-8" />
@@ -14,16 +18,90 @@
     <div class="container">
         &copy; 2020 - Centrum Medyczne Farulewski Klinika, Bydgoszcz, ul. Medyczna 21 oraz Toruń, ul. Kopernika 17, telefon: 345-76-87, 345-76-88.
     </div>
+
 </footer>
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+
 @RenderSection("Scripts", required: false)
 
-@if (SignInManager.IsSignedIn(User))
+
+
+@if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+
 {
     <!DOCTYPE html>
     <html lang="en">
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Centrum Medyczne</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Onas">O nas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
+                            </li>
+
+                            <div class="btn-group">
+                                <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Panel administratora
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" asp-controller="NewLekarz" asp-action="Index">Zarządzaj personelem</a>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListRoles">Zarządzaj rolami</a>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="ListUsers">Zarządzaj użytkownikami</a>
+                                    <div class="dropdown-divider">Na skróty</div>
+                                    <a class="dropdown-item" asp-controller="NewLekarz" asp-action="Create">Dodaj pracownika</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-controller="Administration" asp-action="CreateRole">Dodaj rolę</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" asp-controller="Account" asp-action="Register">Dodaj użytkownika</a>
+                                </div>
+                            </div>
+                        </ul>
+                    </div>
+
+                </div>
+            </nav>
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+
+                @RenderBody()
+
+            </main>
+        </div>
+    </body>
+</html>
+
+}
+
+
+@if (SignInManager.IsSignedIn(User) && !(User.IsInRole("Admin")))
+
+{
 
     <body>
         <header>
@@ -37,20 +115,20 @@
                     <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                         <partial name="_LoginPartial" />
                         <ul class="navbar-nav flex-grow-1">
+
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Onas">O nas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Onas">O nas</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="NewLekarz" asp-action="Create">Create</a>
+                                <a class="nav-link text-dark" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
                             </li>
                         </ul>
                     </div>
@@ -59,66 +137,61 @@
         </header>
         <div class="container">
             <main role="main" class="pb-3">
-
                 @RenderBody()
             </main>
         </div>
     </body>
-</html>
 
 }
-else
-{
-<html lang="en">
 
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Centrum Medyczne</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Onas">O nas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
-                        </li>
-                    </ul>
+@if (!(SignInManager.IsSignedIn(User)) && !(User.IsInRole("Admin")))
+
+{
+
+    <body>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Centrum Medyczne</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                        <partial name="_LoginPartial" />
+                        <ul class="navbar-nav flex-grow-1">
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Onas">O nas</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
-                <!-- <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Register" class="nav-link">Zarejestruj się</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Account" asp-action="Login" class="nav-link">Zaloguj się</a>
-                    </li>
-                </ul>-->
-            </div>
+            </nav>
+        </header>
 
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-</body>
-</html>
+        <div class="container">
+
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+    </body>
 }
-<div>
-    @RenderBody()
-</div>
+
+
 @if (IsSectionDefined("site"))
+
 {
+
     @RenderSection("site", required: true);
+
 }
- 
