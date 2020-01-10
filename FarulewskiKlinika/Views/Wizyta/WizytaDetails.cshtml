@@ -6,9 +6,7 @@
 
 <img src="~/Images/img3.jpg" align="left" height="200" width="250" />
 
-<p class="h3">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
-
-<br />
+<p class="h4">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
 
 <p class="h5">  Podsumowanie </p>
 <hr />
@@ -37,13 +35,13 @@
             <hr />
             <div class="form-group">
                 <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
-                <a asp-controller="NewLekarz" asp-action="WizytaPDF" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-outline-secondary">Wydruk do PDF</a>
+                <a asp-controller="Wizyta" asp-action="WizytaPDF" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-outline-secondary">Wydruk do PDF</a>
             </div>
         </div>
-</div>
+    </div>
 
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }
 

@@ -14,7 +14,7 @@
         <div class="col-md-4">
             <h4 class="text-primary">  Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
             <br />
-            <form asp-action="Create">
+            <form asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <p class="text-white bg-dark">Pacjent</p>
@@ -22,9 +22,11 @@
                     <p>Nazwisko: @UserManager.GetUserAsync(User).Result.Nazwisko</p>
                     <p>Email: @UserManager.GetUserAsync(User).Result.Email
                     <p>Pesel: @UserManager.GetUserAsync(User).Result.Pesel
+                    <p>UserName: @UserManager.GetUserAsync(User).Result.UserName
                 </div>
                 <div class="form-group">
                     <p class="text-white bg-dark">Lekarz</p>
+                    <p>LekarzID: @Model.Lekarz.LekarzID</p>
                     <p>Imie: @Model.Lekarz.Imie</p>
                     <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
                     <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
@@ -37,8 +39,8 @@
                 </div>
 
                 <div class="form-group">
-                    <a asp-controller="NewLekarz" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary" method ="post">Umawiam</a>
-
+                    @*<!-- <a asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary" method="post">Umawiam</a> *@
+                    <button type="submit" class="btn btn-primary" >Umawiam</button>
                     <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>
@@ -48,27 +50,27 @@
 
 else
 {
-<br>
-<img src="~/Images/img1.jpg" align="left" height="200" width="250" />
-<font size="5">Przed umówieniem wizyty, proszę się zalogować.</font>
-<br>
-<br>
-<font size="3">Czy już się rejestrowałeś? Proszę potwierdzić rejestrację.</font>
-<br>
-<br>
-<br>
-<br>
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Zarejestruj się</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Zaloguj się</a>
-    </li>
-    <li class="nav-item">
-        <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
-    </li>
-</ul>
+    <br>
+    <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
+    <font size="5">Przed umówieniem wizyty, proszę się zalogować.</font>
+    <br>
+    <br>
+    <font size="3">Czy już się rejestrowałeś? Proszę potwierdzić rejestrację.</font>
+    <br>
+    <br>
+    <br>
+    <br>
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Zarejestruj się</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-controller="Account" asp-action="Login">Zaloguj się</a>
+        </li>
+        <li class="nav-item">
+            <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
+        </li>
+    </ul>
 }
 
 @section Scripts {

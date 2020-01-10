@@ -10,16 +10,13 @@ namespace FarulewskiKlinika.Models
     {
         public int WizytaID { get; set; }
 
-        [Display(Name = "Pacjent")]
-        public int UserID { get; set; }
+        public string UserName { get; set; }
 
-        [Display(Name = "Lekarz")]
         public int LekarzID { get; set; }
 
-
-        [Required(ErrorMessage = "Proszę podać datę wizyty")]
         [Display(Name = "Data wizyty")]
-        public DateTime DataWizyty { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd-MM-yyyy}", ApplyFormatInEditMode = true)]
+        public DateTime? DataWizyty { get; set; }
 
         // public string Zalecenia { get; set; }
 
@@ -27,8 +24,6 @@ namespace FarulewskiKlinika.Models
         // podcza wizyty przyjmuje jeden lekarz
         public virtual Lekarz Lekarz { get; set; }
 
-        // podczas wizyty obsługiwany jest jeden pacjent
-        public virtual Pacjent Pacjent { get; set; }
     }
 }
 

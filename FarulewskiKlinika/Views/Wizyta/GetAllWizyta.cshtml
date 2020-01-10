@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Wizyta>
+
+<html>
+<head>
+    <title></title>
+</head>
+<p>Dzisiaj jest: @ViewBag.TerazJest</p>
+<body>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">WizytaID </th>
+                <th scope="col">LekarzID </th>
+                <th scope="col">UserName </th>
+                <th scope="col">DataWizyty </th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--Dla każdego obiektu wizyty w Modelu-->
+            @foreach (var wizyta in Model)
+            {
+                <tr>
+                    <td>@wizyta.WizytaID</td>
+                    <td>@wizyta.LekarzID</td>
+                    <td>@wizyta.UserName</td>
+                    <td>@wizyta.DataWizyty</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</body>
+</html>

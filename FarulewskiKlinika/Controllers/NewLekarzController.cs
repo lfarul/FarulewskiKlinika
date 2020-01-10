@@ -15,6 +15,7 @@ using Rotativa.AspNetCore;
 
 namespace FarulewskiKlinika.Controllers
 {
+    
     public class NewLekarzController : Controller
     {
         // dependency injection przez konstruktor
@@ -39,14 +40,14 @@ namespace FarulewskiKlinika.Controllers
             return View(model);
         }
 
-        // Wykaz lekarzy dla administratora
+        [Authorize(Roles = "Admin, Recepcja")]
         public ViewResult Index()
         {
             var model = _lekarzRepository.GetAllLekarz();
             return View(model);
         }
 
-
+        [Authorize(Roles = "Admin, Recepcja")]
         public ViewResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
@@ -58,7 +59,7 @@ namespace FarulewskiKlinika.Controllers
             return View(homeDetailsViewModel);
         }
         [HttpGet]
-        //[Authorize]
+        [Authorize(Roles = "Admin, Recepcja")]
         public ViewResult Create()
         {
 
@@ -66,7 +67,7 @@ namespace FarulewskiKlinika.Controllers
         }
 
         [HttpGet]
-        //[Authorize]
+        [Authorize(Roles = "Admin, Recepcja")]
         public ViewResult Edit(int id)
         {
             Lekarz lekarz = _lekarzRepository.GetLekarz(id);
@@ -155,65 +156,6 @@ namespace FarulewskiKlinika.Controllers
             }
             return View();
         }
-
-
-      /*  [HttpPost]
-        //[Authorize]
-        public IActionResult CreateWizyta(WizytaViewModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                Wizyta newWizyta = new Wizyta
-                {
-                    WizytaID = model.WizytaID,
-                    Lekarz = model.Lekarz,
-                    UserID = model.UserID,
-                    DataWizyty = model.DataWizyty,
-                };
-
-                _lekarzRepository.Add(newWizyta);
-
-                return RedirectToAction("details", new { id = newWizyta.WizytaID });
-            }
-            return View();
-        }
-
-    */
-
-        //[HttpPost]
-        public IActionResult Wizyta(int id)
-        {
-            WizytaViewModel wizytaViewModel = new WizytaViewModel()
-            {
-                Lekarz = _lekarzRepository.GetLekarz(id),
-                
-            };
-
-            return View(wizytaViewModel);
-        }
-        //[HttpGet]
-        public ViewResult WizytaDetails(int id)
-        {
-            WizytaDetailsViewModel wizytaDetailsViewModel = new WizytaDetailsViewModel()
-            {
-                Lekarz = _lekarzRepository.GetLekarz(id),     
-            };
-
-            return View(wizytaDetailsViewModel);
-        }
-
-        // Zapisz w PDF
-        public ViewResult WizytaPDF(int id)
-        {
-            WizytaDetailsPdfViewModel wizytaDetailsPdfViewModel = new WizytaDetailsPdfViewModel()
-            {
-                Lekarz = _lekarzRepository.GetLekarz(id),
-
-            };
-
-            return new ViewAsPdf(wizytaDetailsPdfViewModel);
-        }
-
 
         public Lekarz Delete(int id)
         {

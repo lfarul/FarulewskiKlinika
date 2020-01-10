@@ -25,7 +25,7 @@ namespace FarulewskiKlinika.Repositories
 
         public Lekarz Delete(int id)
         {
-            // before deleting a Pacjent, we need to find them first
+            // before deleting a Lekarz, we need to find them first
             Lekarz lekarz = context.Lekarze.Find(id);
             if (lekarz != null)
             {

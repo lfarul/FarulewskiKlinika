@@ -4,14 +4,16 @@ using FarulewskiKlinika.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FarulewskiKlinika.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200109092518_UserNameWizyta")]
+    partial class UserNameWizyta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -172,6 +174,34 @@ namespace FarulewskiKlinika.Migrations
                         });
                 });
 
+            modelBuilder.Entity("FarulewskiKlinika.Models.Pacjent", b =>
+                {
+                    b.Property<int>("PacjentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Imie")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nazwisko")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pesel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("PacjentID");
+
+                    b.ToTable("Pacjenci");
+                });
+
             modelBuilder.Entity("FarulewskiKlinika.Models.Wizyta", b =>
                 {
                     b.Property<int>("WizytaID")
@@ -179,18 +209,23 @@ namespace FarulewskiKlinika.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DataWizyty")
+                    b.Property<DateTime>("DataWizyty")
                         .HasColumnType("datetime2");
 
                     b.Property<int>("LekarzID")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("PacjentID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserName")
+                        .HasColumnType("int");
 
                     b.HasKey("WizytaID");
 
                     b.HasIndex("LekarzID");
+
+                    b.HasIndex("PacjentID");
 
                     b.ToTable("Wizyty");
                 });
@@ -333,6 +368,10 @@ namespace FarulewskiKlinika.Migrations
                         .HasForeignKey("LekarzID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FarulewskiKlinika.Models.Pacjent", "Pacjent")
+                        .WithMany("Wizyty")
+                        .HasForeignKey("PacjentID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

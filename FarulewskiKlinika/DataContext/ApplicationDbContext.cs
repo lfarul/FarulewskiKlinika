@@ -15,7 +15,6 @@ namespace FarulewskiKlinika.DataContext
         {
 
         }
-        public DbSet<Pacjent> Pacjenci { get; set; }
         public DbSet<Lekarz> Lekarze { get; set; }
         public DbSet<Wizyta> Wizyty { get; set; }
 

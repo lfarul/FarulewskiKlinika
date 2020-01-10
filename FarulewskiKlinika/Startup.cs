@@ -48,9 +48,9 @@ namespace FarulewskiKlinika
             });
 
             services.AddControllersWithViews();
-            services.AddMvc();
+            services.AddMvc().AddXmlSerializerFormatters();
             services.AddScoped<LekarzRepository, SqlLekarzRepository>();
-            services.AddScoped<WizytaRepository, WizytaRepositoryImpl>();
+            services.AddScoped<WizytaRepository, SqlWizytaRepository>();
             services.ConfigureApplicationCookie(options =>
             {
                 options.Cookie.Name = "CookieName";

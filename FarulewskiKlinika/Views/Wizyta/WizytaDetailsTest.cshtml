@@ -1,0 +1,27 @@
+﻿<!--Now it is strongly typped view - it is better than ViewBag and ViewData-->
+
+@model FarulewskiKlinika.ViewModels.WizytaDetailsTestViewModel
+
+<html 
+<head>
+    <title></title>
+</head>
+<body>
+    <h3> Wykaz wizyt</h3>
+    <br />
+    <p> Dzisiaj jest @ViewBag.TerazJest </p>
+    <div>
+        <br />
+        WizytaID: @Model.Wizyta.WizytaID
+    </div>
+    <div>
+        Lekarz: @Model.Wizyta.LekarzID
+    </div>
+    <div>
+        UserName: @Model.Wizyta.UserName
+    </div>
+    <div>
+        Data i godzina: @Model.Wizyta.DataWizyty
+    </div>
+</body>
+</html>

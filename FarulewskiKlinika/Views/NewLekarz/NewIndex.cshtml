@@ -37,7 +37,7 @@
                             @lekarz.Opis
                         </p>
                         <form>
-                            <a asp-controller="NewLekarz" asp-action="Wizyta" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1">Umów wizytę</a>
+                            <a asp-controller="Wizyta" asp-action="Wizyta" asp-route-id="@lekarz.LekarzID" class="btn btn-primary m-1"method="get">Umów wizytę</a>
                             <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">Powrót</a>
                         </form>
                     </div>
