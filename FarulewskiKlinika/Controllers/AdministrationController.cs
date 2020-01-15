@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FarulewskiKlinika.Controllers
 {
     // Tylko użytkownik pełniący rolę Admin ma dostęp do funkcji Administratora
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin, Recepcja, Lekarz")]
     public class AdministrationController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;
@@ -143,6 +143,7 @@ namespace FarulewskiKlinika.Controllers
             var users = userManager.Users;
             return View(users);
         }
+
 
         [HttpGet]
         public async Task<IActionResult> EditUser(string id)

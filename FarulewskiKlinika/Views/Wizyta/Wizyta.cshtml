@@ -14,7 +14,7 @@
         <div class="col-md-4">
             <h4 class="text-primary">  Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
             <br />
-            <form asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" method="post">
+            <form asp-controller="Wizyta" asp-action="CreateWizyta" asp-route-id="@Model.Lekarz.LekarzID" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
                     <p class="text-white bg-dark">Pacjent</p>
@@ -40,7 +40,7 @@
 
                 <div class="form-group">
                     @*<!-- <a asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary" method="post">Umawiam</a> *@
-                    <button type="submit" class="btn btn-primary" >Umawiam</button>
+                    <a asp-controller="Wizyta" asp-action="CreateWizyta" button type="submit" value="save" class="btn btn-primary" method="post">Umawiam</a>
                     <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>

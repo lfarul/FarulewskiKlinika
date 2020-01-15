@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Web;
 using System.Linq;
 using System.Threading.Tasks;
 using FarulewskiKlinika.DataContext;
@@ -15,7 +16,7 @@ using Rotativa.AspNetCore;
 
 namespace FarulewskiKlinika.Controllers
 {
-    
+   
     public class NewLekarzController : Controller
     {
         // dependency injection przez konstruktor
@@ -40,14 +41,14 @@ namespace FarulewskiKlinika.Controllers
             return View(model);
         }
 
-        [Authorize(Roles = "Admin, Recepcja")]
+        [Authorize(Roles = "Admin, Recepcja, Lekarz")]
         public ViewResult Index()
         {
             var model = _lekarzRepository.GetAllLekarz();
             return View(model);
         }
 
-        [Authorize(Roles = "Admin, Recepcja")]
+        [Authorize(Roles = "Admin, Recepcja, Lekarz")]
         public ViewResult Details(int id)
         {
             HomeDetailsViewModel homeDetailsViewModel = new HomeDetailsViewModel()
@@ -58,8 +59,9 @@ namespace FarulewskiKlinika.Controllers
 
             return View(homeDetailsViewModel);
         }
+
         [HttpGet]
-        [Authorize(Roles = "Admin, Recepcja")]
+        [Authorize(Roles = "Admin, Recepcja, Lekarz")]
         public ViewResult Create()
         {
 
@@ -67,7 +69,7 @@ namespace FarulewskiKlinika.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin, Recepcja")]
+        [Authorize(Roles = "Admin, Recepcja, Lekarz")]
         public ViewResult Edit(int id)
         {
             Lekarz lekarz = _lekarzRepository.GetLekarz(id);
@@ -86,7 +88,7 @@ namespace FarulewskiKlinika.Controllers
 
 
         [HttpPost]
-        //[Authorize]
+        [Authorize(Roles = "Admin, Recepcja, Lekarz")]
         public IActionResult Edit(LekarzEditViewModel model)
         {
             if (ModelState.IsValid)
@@ -168,6 +170,7 @@ namespace FarulewskiKlinika.Controllers
             }
             return lekarz;
         }
+        
     }
 }
  

@@ -13,6 +13,7 @@
                 <th scope="col">LekarzID </th>
                 <th scope="col">UserName </th>
                 <th scope="col">DataWizyty </th>
+                <th scope="col">Co chcesz zrobić? </th>
             </tr>
         </thead>
         <tbody>
@@ -24,9 +25,17 @@
                     <td>@wizyta.LekarzID</td>
                     <td>@wizyta.UserName</td>
                     <td>@wizyta.DataWizyty</td>
+                    <td>
+                        <a class="btn btn-secondary btn-sm" asp-controller="Wizyta" asp-action="EditWizyta" asp-route-id="@wizyta.WizytaID">Edytuj</a> |
+                        <a class="btn btn-secondary btn-sm" asp-controller="Wizyta" asp-action="DetailWizyta" asp-route-id="@wizyta.WizytaID">Szczegóły</a> |
+                        <a asp-controller="Wizyta" asp-action="DeleteWizyta" asp-route-id="@wizyta.WizytaID" class="btn btn-danger btn-sm"
+                            onclick="return confirm('Czy na pewno chcesz usunąć wizytę: @wizyta.WizytaID ?')">Usuń</a>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 </body>
 </html>
+
+

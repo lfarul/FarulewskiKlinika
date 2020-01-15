@@ -43,7 +43,7 @@ namespace FarulewskiKlinika.Repositories
 
         public Wizyta Update(Wizyta wizytaUpdate)
         {
-            Wizyta wizyta = _wizytaList.FirstOrDefault(e => e.LekarzID == wizytaUpdate.WizytaID);
+            Wizyta wizyta = _wizytaList.FirstOrDefault(e => e.WizytaID == wizytaUpdate.WizytaID);
             if (wizyta != null)
             {
                 wizyta.LekarzID = wizytaUpdate.LekarzID;

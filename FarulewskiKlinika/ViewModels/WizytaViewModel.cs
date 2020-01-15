@@ -19,7 +19,6 @@ namespace FarulewskiKlinika.ViewModels
         
         public int WizytaID { get; set; }
         public Lekarz Lekarz { get; set; }
-
         public string Specjalizacja { get; set; }
 
         // pacjent
