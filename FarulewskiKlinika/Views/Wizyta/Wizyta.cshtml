@@ -31,6 +31,8 @@
                     <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
                     <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
                 </div>
+                <input type="hidden" asp-for="@Model.Lekarz.LekarzID" />
+                <input type="hidden" asp-for="@Model.UserID" />
                 <div class="form-group">
                     <p class="text-white bg-dark">Data wizyty</p>
                     <label asp-for="DataWizyty" class="control-label">Proszę podać datę i godzinę wizyty</label>
@@ -40,7 +42,7 @@
 
                 <div class="form-group">
                     @*<!-- <a asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary" method="post">Umawiam</a> *@
-                    <a asp-controller="Wizyta" asp-action="CreateWizyta" button type="submit" value="save" class="btn btn-primary" method="post">Umawiam</a>
+                    <button type="submit" value="save" class="btn btn-primary" method="post">Umawiam</button>
                     <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>

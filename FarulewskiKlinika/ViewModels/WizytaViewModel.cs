@@ -23,7 +23,7 @@ namespace FarulewskiKlinika.ViewModels
 
         // pacjent
         public string UserName { get; set; }
-        public int UserID { get; set; }
+        public string UserID { get; set; }
 
         public int LekarzID { get; set; }
 

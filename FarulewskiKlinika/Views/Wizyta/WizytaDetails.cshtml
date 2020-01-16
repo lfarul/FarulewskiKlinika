@@ -8,7 +8,7 @@
 
 <p class="h4">Dziękujemy za umówienie wizyty @UserManager.GetUserAsync(User).Result.Imie</p>
 
-<p class="h5">  Podsumowanie </p>
+<p class="h5">Podsumowanie</p>
 <hr />
 
 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -27,6 +27,7 @@
             <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
             <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
         </div>
+        <input type="hidden" asp-for="@Model.Lekarz.LekarzID" />
         <div class="form-group">
             <div class="form-group">
                 <p class="text-white bg-dark">Data wizyty</p>

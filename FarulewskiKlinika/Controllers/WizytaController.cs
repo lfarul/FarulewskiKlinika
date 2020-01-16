@@ -40,18 +40,34 @@ namespace FarulewskiKlinika.Controllers
 
         //Ta metoda zwraca formularz do wypełnienia w celu umówienia wizyty
         [HttpGet]
-        public ViewResult CreateWizyta()
+        public ViewResult CreateWizyta(int id)
         {
-            return View();
+            WizytaViewModel wizyta = new WizytaViewModel();
+            wizyta.LekarzID = _lekarzRepository.GetLekarz(id).LekarzID;
+            //parsowanie do int
+            wizyta.UserID = userManager.GetUserId(User);
+            return View(wizyta);
         }
 
         // Tutaj Recepcja i Administrator umawia wizytę
         [HttpPost]
-        public RedirectToActionResult CreateWizyta(Wizyta wizyta)
+        public RedirectToActionResult CreateWizyta(WizytaViewModel wizyta)
         {
-            Wizyta newWizyta =_wizytaRepository.Add(wizyta);
-    
-            return RedirectToAction("GetAllWizyta");
+            if (context.Wizyty.Where(x =>x.DataWizyty == wizyta.DataWizyty && x.Lekarz.LekarzID == wizyta.Lekarz.LekarzID).Any())
+            {
+                return RedirectToAction("WizytaIstnieje");
+            }
+            else {
+                Models.Wizyta wizytaModel = new Models.Wizyta();
+
+                wizytaModel.Lekarz = context.Lekarze.FirstOrDefault(x => x.LekarzID == wizyta.Lekarz.LekarzID);
+                wizytaModel.UserName = userManager.GetUserName(User);
+                wizytaModel.DataWizyty = wizyta.DataWizyty;
+
+                Wizyta newWizyta = _wizytaRepository.Add(wizytaModel);
+                context.SaveChanges();
+            }
+            return RedirectToAction("WizytaDetails");
         }
 
 
@@ -60,7 +76,9 @@ namespace FarulewskiKlinika.Controllers
         {
             WizytaViewModel wizytaViewModel = new WizytaViewModel()
             {
+                UserID = userManager.GetUserId(User),
                 Lekarz = _lekarzRepository.GetLekarz(id),
+                LekarzID = _lekarzRepository.GetLekarz(id).LekarzID,
             };
 
             return View(wizytaViewModel);
