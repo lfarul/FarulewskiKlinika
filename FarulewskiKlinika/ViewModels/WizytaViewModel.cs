@@ -32,7 +32,9 @@ namespace FarulewskiKlinika.ViewModels
         public DateTime? DataWizyty { get; set; }
 
         public List<string> Users { get; set; }
-    
+
+        public bool IsSelected { get; set; }
+
     }
 }
     

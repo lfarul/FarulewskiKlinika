@@ -59,7 +59,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a asp-controller="Wizyta" asp-action="CreateWizyta" class="btn btn-outline-primary">Umów wizytę</a>|              |
+                                <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-primary">Umów wizytę</a>|              |
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary" asp-controller="Wizyta" asp-action="GetAllWizyta">Pokaż wizyty</a>|      |
@@ -80,7 +80,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Register">Zarejestruj użytkownika</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-controller="Wizyta" asp-action="CreateWizyta">Umów wizytę</a>
+                                    <a class="dropdown-item" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
 
                                 </div>
                             </div>
@@ -134,7 +134,7 @@
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary" asp-controller="Wizyta" asp-action="CreateWizyta">Umów wizytę</a>|       |
+                                <a class="btn btn-outline-primary" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>|       |
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-secondary" asp-controller="Wizyta" asp-action="GetAllWizyta">Pokaż wizyty</a>|      |
@@ -149,7 +149,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Register">Zarejestruj użytkownika</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-controller="Wizyta" asp-action="CreateWizyta">Umów wizytę</a>
+                                    <a class="dropdown-item" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="NewLekarz" asp-action="Create">Dodaj pracownika</a>
                                 </div>
@@ -205,7 +205,7 @@
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a class="btn btn-outline-primary" asp-controller="Wizyta" asp-action="CreateWizyta">Umów wizytę</a>|        |
+                                <a class="btn btn-outline-primary" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>|        |
                             </li>
                             <li class="nav-item">
                                 <a class="btn btn-outline-primary" asp-controller="Wizyta" asp-action="MojaWizyta">Moje wizyty</a>|          |
@@ -220,7 +220,7 @@
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" asp-controller="Account" asp-action="Register">Zarejestruj pacjenta</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" asp-controller="Wizyta" asp-action="CreateWizyta">Umów wizytę</a>
+                                    <a class="dropdown-item" asp-controller="NewLekarz" asp-action="NewIndex">Umów wizytę</a>
                                 </div>
                         </ul>
                     </div>
@@ -270,7 +270,10 @@
                                 <a class="nav-link text-dark" asp-controller="Home" asp-action="Kontakt">Kontakt</a>
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-primary">Umów wizytę</a>
+                                <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-primary">Umów wizytę</a>|     |
+                            </li>
+                            <li class="nav-item">
+                                <a asp-controller="Wizyta" asp-action="GetAllWizyta" class="btn btn-outline-primary">Wizyty</a>
                             </li>
                         </ul>
                     </div>

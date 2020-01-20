@@ -38,7 +38,7 @@ namespace FarulewskiKlinika.Controllers
             return View(model);
 ;        }
 
-        //Ta metoda zwraca formularz do wypełnienia w celu umówienia wizyty
+        //Wizytę umawia Pacjent - get
         [HttpGet]
         public ViewResult CreateWizyta(int id)
         {
@@ -49,7 +49,7 @@ namespace FarulewskiKlinika.Controllers
             return View(wizyta);
         }
 
-        // Tutaj Recepcja i Administrator umawia wizytę
+        // Wizytę umawia Pacjent - post
         [HttpPost]
         public RedirectToActionResult CreateWizyta(WizytaViewModel wizyta)
         {
@@ -57,6 +57,7 @@ namespace FarulewskiKlinika.Controllers
             {
                 return RedirectToAction("WizytaIstnieje");
             }
+
             else {
                 Models.Wizyta wizytaModel = new Models.Wizyta();
 
@@ -67,12 +68,69 @@ namespace FarulewskiKlinika.Controllers
                 Wizyta newWizyta = _wizytaRepository.Add(wizytaModel);
                 context.SaveChanges();
             }
-            return RedirectToAction("WizytaDetails");
+            return RedirectToAction("GetAllWizyta");
         }
 
+        //Wizytę umawia Personel - get
+        [HttpGet]
+        public ViewResult PersonelCreateWizyta(int id)
+        {
+            WizytaViewModel wizyta = new WizytaViewModel();
+            wizyta.LekarzID = _lekarzRepository.GetLekarz(id).LekarzID;
+            //parsowanie do int
+            wizyta.UserID = userManager.GetUserId(User);
+            return View(wizyta);
+        }
+
+        // Wizytę umawia Personel - post
+        [HttpPost]
+        public RedirectToActionResult PersonelCreateWizyta(WizytaViewModel wizyta)
+        {
+            if (context.Wizyty.Where(x => x.DataWizyty == wizyta.DataWizyty && x.Lekarz.LekarzID == wizyta.Lekarz.LekarzID).Any())
+            {
+                return RedirectToAction("WizytaIstnieje");
+            }
+
+            else
+            {
+                Models.Wizyta wizytaModel = new Models.Wizyta();
+
+                wizytaModel.Lekarz = context.Lekarze.FirstOrDefault(x => x.LekarzID == wizyta.Lekarz.LekarzID);
+                wizytaModel.UserName = userManager.GetUserName(User);
+                wizytaModel.DataWizyty = wizyta.DataWizyty;
+
+                Wizyta newWizyta = _wizytaRepository.Add(wizytaModel);
+                context.SaveChanges();
+            }
+            return RedirectToAction("GetAllWizyta");
+        }
+
+        public IActionResult WizytaIstnieje()
+        {
+            return View();
+        }
+
+        public IActionResult SpoznionaWizyta()
+        {
+            ViewBag.TerazJest = DateTime.Now;
+            return View();
+        }
 
         // Tutaj Pacjent umawia wizytę
         public IActionResult Wizyta(int id)
+        {
+            WizytaViewModel wizytaViewModel = new WizytaViewModel()
+            {
+                UserID = userManager.GetUserId(User),
+                Lekarz = _lekarzRepository.GetLekarz(id),
+                LekarzID = _lekarzRepository.GetLekarz(id).LekarzID,
+            };
+
+            return View(wizytaViewModel);
+        }
+
+        // Tutaj Personel umawia wizytę
+        public IActionResult PersonelWizyta(int id)
         {
             WizytaViewModel wizytaViewModel = new WizytaViewModel()
             {
@@ -89,6 +147,9 @@ namespace FarulewskiKlinika.Controllers
         {
             WizytaDetailsViewModel wizytaDetailsViewModel = new WizytaDetailsViewModel()
             {
+
+                UserID = userManager.GetUserId(User),
+                Wizyta = _wizytaRepository.GetWizyta(id),
                 Lekarz = _lekarzRepository.GetLekarz(id),
             };
 
@@ -96,22 +157,30 @@ namespace FarulewskiKlinika.Controllers
         }
 
         // Po umówieniu wizyty, podsumowanie można zapisać do PDF
-        public ViewResult WizytaPDF(int id)
+        public async Task<IActionResult> WizytaPDF(int? id)
         {
-            WizytaDetailsPdfViewModel wizytaDetailsPdfViewModel = new WizytaDetailsPdfViewModel()
+            if (id == null)
             {
-                Lekarz = _lekarzRepository.GetLekarz(id),
+                return NotFound();
+            }
 
-            };
-            return new ViewAsPdf(wizytaDetailsPdfViewModel);
+            var wizyta = await context.Wizyty
+                .FirstOrDefaultAsync(m => m.WizytaID == id);
+            if (wizyta == null)
+            {
+                return NotFound();
+            }
+
+            return new ViewAsPdf(wizyta);
         }
 
         // Tutaj powinny wyświetlać się wizyty tylko dla zalogowanego lekarza
-        public IActionResult MojaWizyta(int id)
+        public ViewResult MojaWizyta(int id)
         {
             var wizyta = _wizytaRepository.GetAllWizyta();
+            wizyta = wizyta.Where(p => p.UserName == "jwayne@gmail.com");
             ViewBag.TerazJest = DateTime.Now;
-            return View(wizyta);
+            return View (wizyta);
         }
 
         // Edytuję wizytę

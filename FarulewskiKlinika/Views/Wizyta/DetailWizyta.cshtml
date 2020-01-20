@@ -3,7 +3,8 @@
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
 
-<h3>Szczegóły wizyty</h3>
+    <img src="~/Images/img3.jpg" align="left" height="200" width="250" />
+    <h5>Szczegóły Twojej wizyty @Html.DisplayFor(model => model.UserName)</h5>
 <div>
     <hr />
     <dl class="row">
@@ -28,6 +29,7 @@
     </dl>
 </div>
 <div>
-    <a asp-controller="Wizyta" asp-action="EditWizyta" class="btn btn-primary" asp-route-id="@Model.WizytaID">Edytuj</a>
-    <a asp-controller="Wizyta" asp-action="GetAllWizyta" class="btn btn-outline-secondary">Powrót</a>
+    <a asp-controller="Wizyta" asp-action="EditWizyta" class="btn btn-primary btn-sm" asp-route-id="@Model.WizytaID">Edytuj</a>
+    <a asp-controller="Wizyta" asp-action="GetAllWizyta" class="btn btn-outline-secondary btn-sm">Powrót</a>
+    <a asp-controller="Wizyta" asp-action="WizytaPDF" class="btn btn-outline-secondary btn-sm" asp-route-id="@Model.WizytaID">Wydruk do PDF</a>
 </div>

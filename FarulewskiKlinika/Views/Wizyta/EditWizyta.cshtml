@@ -9,10 +9,11 @@
 
 <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
 <h4 class="text-primary">Aktualizujesz dane @UserManager.GetUserAsync(User).Result.Imie ?</h4>
-<div class="row">
-    <div class="col-md-4">
-        <br />
-        <form asp-controller="Wizyta" asp-action="CreateWizyta" method="post">
+<form enctype="multipart/form-data" asp-controller="Wizyta" asp-action="EditWizyta" method="post">
+    <input hidden asp-for="WizytaID" />
+    <div class="row">
+        <div class="col-md-4">
+            <br />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <p class="text-white bg-dark">Lekarz ID</p>
@@ -20,11 +21,6 @@
                 <input asp-for="LekarzID" class="form-control" />
                 <span asp-validation-for="LekarzID" class="text-danger"></span>
             </div>
-
-            @*<div class="form-group">
-                    <label asp-for="Specjalizacja" class="control-label"></label>
-                    @Html.DropDownList("Specjalizacja", null, new { @class = "form-control" })
-                </div>*@
             <div class="form-group">
                 <p class="text-white bg-dark">Email pacjenta</p>
                 <label asp-for="UserName" class="control-label">Proszę podać Email pacjenta</label>
@@ -39,13 +35,14 @@
             </div>
 
             <div class="form-group">
-                <button type="submit" value="Save" class="btn btn-primary">Aktualizuje</button>
+                <button type="submit" class="btn btn-primary">Aktualizuje</button>
                 @*<button type="submit" asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Umawiam</button>*@
                 <a asp-controller="Wizyta" asp-action="GetAllWizyta" class="btn btn-outline-secondary">Powrót</a>
             </div>
-        </form>
+        </div>
     </div>
-</div>
+</form>
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

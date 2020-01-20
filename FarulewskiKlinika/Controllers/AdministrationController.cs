@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FarulewskiKlinika.DataContext;
 using FarulewskiKlinika.Models;
 using FarulewskiKlinika.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace FarulewskiKlinika.Controllers
 {
@@ -16,11 +19,14 @@ namespace FarulewskiKlinika.Controllers
     {
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly UserManager<ApplicationUser> userManager;
+        private readonly ApplicationDbContext context;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager, UserManager<ApplicationUser> userManager,
+            ApplicationDbContext context)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;
+            this.context = context;
         }
 
         // Usuwam Usera i przekazuje w metodzie id usera. Używając tego przychodzącego id chce uzyskać określonego usera z bazy danych
@@ -358,6 +364,63 @@ namespace FarulewskiKlinika.Controllers
             }
 
             return RedirectToAction("EditRole", new { Id = roleId });
+        }
+
+        // List pacjenci
+        [HttpGet]
+        public async Task<IActionResult> ListPacjenci(string id)
+        {
+            var role = await roleManager.FindByIdAsync(id);
+
+            if (role == null)
+            {
+                ViewBag.Errormessage = $"Rola z ID = {id} nie została znaleziona.";
+                return View("NotFound");
+            }
+
+            var model = new EditRoleViewModel
+            {
+                RoleID = role.Id,
+                RoleName = role.Name
+            };
+
+            foreach (var user in userManager.Users)
+            {
+                if (await userManager.IsInRoleAsync(user, role.Name))
+                {
+                    model.Users.Add(user.UserName);
+                }
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ListPacjenci(EditRoleViewModel model)
+        {
+            var role = await roleManager.FindByIdAsync(model.RoleID);
+
+            if (role == null)
+            {
+                ViewBag.ErrorMessage = $"Rola z ID = {model.RoleID} nie została znaleziona.";
+
+                return View("NotFound");
+            }
+            else
+            {
+                role.Name = model.RoleName;
+                var result = await roleManager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("ListRoles");
+                }
+
+                foreach (var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+                return View(model);
+            }
         }
 
     }

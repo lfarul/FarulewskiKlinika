@@ -10,24 +10,29 @@
 @if (SignInManager.IsSignedIn(User))
 {
     <img src="~/Images/img1.jpg" align="left" height="200" width="250" />
-    <h4 class="text-primary">  Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
     <div class="row">
         <div class="col-md-4">
+            <h4 class="text-primary">  Umów wizytę @UserManager.GetUserAsync(User).Result.Imie</h4>
             <br />
-            <form asp-controller="Wizyta" asp-action="CreateWizyta" asp-route-id="@Model.Lekarz.LekarzID" method="post">
+            <form asp-controller="Wizyta" asp-action="PersonelCreateWizyta" asp-route-id="@Model.Lekarz.LekarzID" method="post">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <p class="text-white bg-dark">Lekarz ID</p>
-                    <label asp-for="LekarzID" class="control-label">Proszę podać ID Lekarza</label>
-                    <input asp-for="LekarzID" class="form-control" />
-                    <span asp-validation-for="LekarzID" class="text-danger"></span>
+                    <p class="text-white bg-dark">Lekarz</p>
+                    <p>LekarzID: @Model.Lekarz.LekarzID</p>
+                    <p>Imie: @Model.Lekarz.Imie</p>
+                    <p>Nazwisko: @Model.Lekarz.Nazwisko</p>
+                    <p>Specjalizacja: @Model.Lekarz.Specjalizacja</p>
                 </div>
+                <input type="hidden" asp-for="@Model.Lekarz.LekarzID" />
+                @*<input type="hidden" asp-for="@Model.UserID" />*@
+
                 <div class="form-group">
-                    <p class="text-white bg-dark">Email pacjenta</p>
-                    <label asp-for="UserName" class="control-label">Proszę podać Email pacjenta</label>
+                    <p class="text-white bg-dark">Pacjent</p>
+                    <label asp-for="UserName" class="control-label">Wybierz Pacjenta</label>
                     <input asp-for="UserName" class="form-control" />
                     <span asp-validation-for="UserName" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <p class="text-white bg-dark">Data wizyty</p>
                     <label asp-for="DataWizyty" class="control-label">Proszę podać datę i godzinę wizyty</label>
@@ -36,8 +41,8 @@
                 </div>
 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-primary" >Umawiam</button>
-                    @*<button type="submit" asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary">Umawiam</button>*@
+                    @*<!-- <a asp-controller="Wizyta" asp-action="WizytaDetails" asp-route-id="@Model.Lekarz.LekarzID" class="btn btn-primary" method="post">Umawiam</a> *@
+                    <button type="submit" value="save" class="btn btn-primary" method="post">Umawiam</button>
                     <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
                 </div>
             </form>
@@ -73,3 +78,4 @@ else
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
+

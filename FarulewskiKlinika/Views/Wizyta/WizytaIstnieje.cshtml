@@ -2,23 +2,19 @@
 
 @model FarulewskiKlinika.ViewModels.WizytaDetailsViewModel
 
-<html 
+<html>
 <head>
     <title></title>
 </head>
 <body>
-    <h3> Wygląda na to, że nie możesz umówić tej wizyty. Lekarz ma juz umówioną wizytę na ten dzień i godzinę.</h3>
     <br />
-    <p> Dzisiaj jest @ViewBag.TerazJest </p>
-    <div>
-    <div>
-        Lekarz: @Model.Wizyta.LekarzID
-    </div>
-    <div>
-        UserName: @Model.Wizyta.UserName
-    </div>
-    <div>
-        Data i godzina: @Model.Wizyta.DataWizyty
-    </div>
+    <img src="~/Images/watch.JPG" class="rounded mx-auto d-block" height="200" width="450" />
+    <hr />
+    <p class="text-center" >Wygląda na to, że nie możesz umówić tej wizyty. Lekarz ma juz umówioną wizytę na ten dzień i godzinę.</p>
+   
+    <p class="text-center" >Proszę wybrać inny termin.</p>
+        <hr />
+        <br />
+        <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
 </body>
 </html>

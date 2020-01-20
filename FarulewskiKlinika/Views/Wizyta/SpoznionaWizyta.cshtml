@@ -1,0 +1,23 @@
+﻿<!--Now it is strongly typped view - atmdoel - it is better than ViewBag and ViewData-->
+
+@model FarulewskiKlinika.ViewModels.WizytaDetailsViewModel
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+    <br />
+    <img src="~/Images/watch.JPG" class="rounded mx-auto d-block" height="200" width="350" />
+    <hr />
+
+    <h4> Dzisiaj mamy @ViewBag.TerazJest  @UserManager.GetUserAsync(User).Result.Imie. 
+    
+    Nie możesz umówić wizyty przed tą datą.</h4>
+    <br />
+    <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-secondary">Powrót</a>
+</body>
+</html>

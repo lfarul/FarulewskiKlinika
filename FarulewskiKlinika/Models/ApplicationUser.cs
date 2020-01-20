@@ -23,6 +23,7 @@ namespace FarulewskiKlinika.Models
         // Nazwisko
         [Required(ErrorMessage = "Proszę podać nazwisko")]
         public string Nazwisko { get; set; }
+
     }
 }
 

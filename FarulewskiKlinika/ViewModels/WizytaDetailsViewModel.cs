@@ -13,7 +13,11 @@ namespace FarulewskiKlinika.ViewModels
         public Wizyta Wizyta { get; set; }
 
         public Lekarz Lekarz { get; set; }
+        public int LekarzID { get; set; }
+        public int WizytaID { get; set; }
+        public string UserID { get; set; }
 
-        public DateTime DataWizyty { get; set; }
+        public string UserName { get; set; }
+        public DateTime? DataWizyty { get; set; }
     }
 }
