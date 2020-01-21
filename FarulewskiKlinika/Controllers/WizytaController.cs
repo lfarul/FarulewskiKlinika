@@ -68,7 +68,7 @@ namespace FarulewskiKlinika.Controllers
                 Wizyta newWizyta = _wizytaRepository.Add(wizytaModel);
                 context.SaveChanges();
             }
-            return RedirectToAction("GetAllWizyta");
+            return RedirectToAction("MojaWizyta");
         }
 
         //Wizytę umawia Personel - get
@@ -174,14 +174,17 @@ namespace FarulewskiKlinika.Controllers
             return new ViewAsPdf(wizyta);
         }
 
-        // Tutaj powinny wyświetlać się wizyty tylko dla zalogowanego lekarza
-        public ViewResult MojaWizyta(int id)
+        // Tutaj wyświetlają się wizyty tylko dla zalogowanego pacjenta
+        public async Task<IActionResult> MojaWizyta(int id)
         {
+            ApplicationUser user = await GetCurrentUserAsync();
             var wizyta = _wizytaRepository.GetAllWizyta();
-            wizyta = wizyta.Where(p => p.UserName == "jwayne@gmail.com");
+            wizyta = wizyta.Where(p => p.UserName == user.UserName);
             ViewBag.TerazJest = DateTime.Now;
             return View (wizyta);
         }
+
+        private Task<ApplicationUser> GetCurrentUserAsync() => userManager.GetUserAsync(HttpContext.User);
 
         // Edytuję wizytę
         [HttpGet]

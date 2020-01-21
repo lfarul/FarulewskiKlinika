@@ -25,7 +25,7 @@
 @RenderSection("Scripts", required: false)
 
 
-
+@*Zalogowany Administrator*@
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Admin"))
 
 {
@@ -101,7 +101,7 @@
 </html>
 
 }
-
+@*Zalogowana Recepcja*@
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Recepcja"))
 {
 
@@ -172,7 +172,7 @@
 </html>
 
 }
-
+@*Zalogowany Lekarz*@
 @if (SignInManager.IsSignedIn(User) && User.IsInRole("Lekarz"))
 {
 
@@ -240,7 +240,7 @@
 
 }
 
-
+@*Zalogowany użytkownik, który nie jest Adminem, Lekarzem oraz Recepcją*@
 @if (SignInManager.IsSignedIn(User) && !(User.IsInRole("Admin")) && !(User.IsInRole("Recepcja")) && !(User.IsInRole("Lekarz")))
 
 {
@@ -273,7 +273,7 @@
                                 <a asp-controller="NewLekarz" asp-action="NewIndex" class="btn btn-outline-primary">Umów wizytę</a>|     |
                             </li>
                             <li class="nav-item">
-                                <a asp-controller="Wizyta" asp-action="GetAllWizyta" class="btn btn-outline-primary">Wizyty</a>
+                                <a asp-controller="Wizyta" asp-action="MojaWizyta" class="btn btn-outline-success">Moje Wizyty</a>
                             </li>
                         </ul>
                     </div>
@@ -288,7 +288,7 @@
     </body>
 
 }
-
+@*Osoba niezalogowana*@
 @if (!(SignInManager.IsSignedIn(User)) && !(User.IsInRole("Admin")))
 
 {
